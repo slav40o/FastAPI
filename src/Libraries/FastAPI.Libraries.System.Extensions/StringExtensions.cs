@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Framework.Extensions.System;
+﻿namespace System;
 
 /// <summary>
 /// Defines extension methods on the <see cref="string"/> class.

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FastAPI.Layers.Infrastructure\FastAPI.Layers.Infrastructure.csproj" />
+    <ProjectReference Include="..\FastAPI.Layers.Presentation\FastAPI.Layers.Presentation.csproj" />
+  </ItemGroup>
+
+</Project>
