@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32804.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{73607137-FE2D-449E-8D1A-F8E78D28337F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{937538F4-C18D-4083-AE4F-962FEFA36BB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{FDE38B21-C05A-4897-8764-90C232944F8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Layers", "Layers", "{5917367E-91E5-4394-987F-AC87F3B0D3E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{CEAD237D-9047-4EFC-A6EF-EBE4DA35081C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{B7DD3D86-6B28-46D2-B7BC-77CF05418F9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastAPI.Libraries.System.Extensions", "src\Libraries\FastAPI.Libraries.System.Extensions\FastAPI.Libraries.System.Extensions.csproj", "{655075A3-A55B-4D31-AC9B-A1FB7CE47B40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastAPI.Libraries.Validation", "src\Libraries\FastAPI.Libraries.Validation\FastAPI.Libraries.Validation.csproj", "{01CF366E-E02B-486E-A941-324988DEFD7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{0AC187FE-38EB-4AC5-8806-0464C4A0C578}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastAPI.Libraries.System.Extensions.Tests", "test\Libraries\FastAPI.Libraries.System.Extensions.Tests\FastAPI.Libraries.System.Extensions.Tests.csproj", "{7DAB6060-D863-4B91-B20F-BE98969E05C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{655075A3-A55B-4D31-AC9B-A1FB7CE47B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655075A3-A55B-4D31-AC9B-A1FB7CE47B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655075A3-A55B-4D31-AC9B-A1FB7CE47B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655075A3-A55B-4D31-AC9B-A1FB7CE47B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01CF366E-E02B-486E-A941-324988DEFD7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01CF366E-E02B-486E-A941-324988DEFD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01CF366E-E02B-486E-A941-324988DEFD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01CF366E-E02B-486E-A941-324988DEFD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DAB6060-D863-4B91-B20F-BE98969E05C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DAB6060-D863-4B91-B20F-BE98969E05C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DAB6060-D863-4B91-B20F-BE98969E05C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DAB6060-D863-4B91-B20F-BE98969E05C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5917367E-91E5-4394-987F-AC87F3B0D3E1} = {73607137-FE2D-449E-8D1A-F8E78D28337F}
+		{CEAD237D-9047-4EFC-A6EF-EBE4DA35081C} = {73607137-FE2D-449E-8D1A-F8E78D28337F}
+		{B7DD3D86-6B28-46D2-B7BC-77CF05418F9F} = {73607137-FE2D-449E-8D1A-F8E78D28337F}
+		{655075A3-A55B-4D31-AC9B-A1FB7CE47B40} = {CEAD237D-9047-4EFC-A6EF-EBE4DA35081C}
+		{01CF366E-E02B-486E-A941-324988DEFD7D} = {CEAD237D-9047-4EFC-A6EF-EBE4DA35081C}
+		{0AC187FE-38EB-4AC5-8806-0464C4A0C578} = {937538F4-C18D-4083-AE4F-962FEFA36BB4}
+		{7DAB6060-D863-4B91-B20F-BE98969E05C6} = {0AC187FE-38EB-4AC5-8806-0464C4A0C578}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CEADC37-3CBB-423F-82A7-92EA2339E0EB}
+	EndGlobalSection
+EndGlobal
