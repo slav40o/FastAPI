@@ -16,7 +16,7 @@ public sealed record ModificationDetails : ValueObject, IModifierDetails
     /// <param name="userId">User Id.</param>
     /// <param name="userEmail">User Email.</param>
     public ModificationDetails(string userId, string userEmail)
-        : this(userId, userEmail, DateTime.UtcNow)
+        : this(userId, userEmail, FastAPIDateTime.UtcNow)
     {
     }
 
@@ -26,7 +26,7 @@ public sealed record ModificationDetails : ValueObject, IModifierDetails
     /// <param name="userId">User Id.</param>
     /// <param name="userEmail">User Email.</param>
     /// <param name="modificationDate">Date of modification.</param>
-    public ModificationDetails(string userId, string userEmail, DateTime modificationDate)
+    public ModificationDetails(string userId, string userEmail, DateTimeOffset modificationDate)
     {
         Validate(userId, userEmail);
 
@@ -48,7 +48,7 @@ public sealed record ModificationDetails : ValueObject, IModifierDetails
     /// <summary>
     /// Gets modification date.
     /// </summary>
-    public DateTime ModificationDate { get; init; }
+    public DateTimeOffset ModificationDate { get; init; }
 
     private static void Validate(string userId, string userEmail)
     {

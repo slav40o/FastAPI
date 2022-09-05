@@ -8,9 +8,8 @@ using System.Reflection;
 
 public static class PersistenceConfiguration
 {
-    public static IServiceCollection AddPersistenceLayer<TContextType>(
+    public static IServiceCollection AddSqlServerPersistence<TContextType>(
         this IServiceCollection services,
-        IConfiguration configuration,
         Assembly contextAssembly,
         string connectionString)
             where TContextType : DbContext

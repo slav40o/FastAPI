@@ -7,25 +7,34 @@ using System.Text.RegularExpressions;
 
 public static class Ensure
 {
-    public static void NotNull<TValue, TException>(TValue value, string paramName)
+    public static void NotNull<TValue, TException>(TValue value, string paramName, string? message = null)
         where TValue : class
         where TException : ValidationException, new()
-            => That<TValue, TException>(value, val => val is not null, ValidationMessagesProvider.ForNullValue(paramName));
+            => That<TValue, TException>(
+                value,
+                val => val is not null,
+                message ?? ValidationMessagesProvider.ForNullValue(paramName));
 
-    public static void NotEmpty<T, TException>(T value, string paramName)
+    public static void NotEmpty<T, TException>(T value, string paramName, string? message = null)
         where T : IEnumerable<T>
         where TException : ValidationException, new()
     {
-        NotNull<IEnumerable<T>, TException>(value, paramName);
-        That<T, TException>(value, val => val.Any(), ValidationMessagesProvider.ForEmptyString(paramName));
+        NotNull<IEnumerable<T>, TException>(value, paramName, message);
+        That<T, TException>(
+            value,
+            val => val.Any(),
+            message ?? ValidationMessagesProvider.ForEmptyString(paramName));
     }
 
     #region String
-    public static void NotEmpty<TException>(string value, string paramName)
+    public static void NotEmpty<TException>(string value, string paramName, string? message = null)
         where TException : ValidationException, new()
     {
-        NotNull<string, TException>(value, paramName);
-        That<string, TException>(value, val => val.Any(), ValidationMessagesProvider.ForEmptyString(paramName));
+        NotNull<string, TException>(value, paramName, message);
+        That<string, TException>(
+            value,
+            val => val.Any(),
+            message ?? ValidationMessagesProvider.ForEmptyString(paramName));
     }
 
     public static void HasMinLength<TException>(string value, int minLength, string paramName)
@@ -149,6 +158,13 @@ public static class Ensure
     }
 
     #endregion
+
+    public static void IsValidUrl<TException>(string url, string paramName, string? errorMessage = null)
+        where TException : ValidationException, new()
+    {
+        string message = errorMessage ?? ValidationMessagesProvider.ForIsValidUrl(paramName);
+        That<string, TException>(url, v => url.Length <= 2048 && Uri.IsWellFormedUriString(url, UriKind.Absolute), message);
+    }
 
     public static void That<TValue, TException>(TValue value, Func<TValue, bool> assertion, string errorMessage)
         where TException : ValidationException, new()

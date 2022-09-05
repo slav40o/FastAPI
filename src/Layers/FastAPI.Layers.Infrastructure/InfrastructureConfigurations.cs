@@ -2,6 +2,7 @@
 
 using FastAPI.Layers.Application.Services;
 using FastAPI.Layers.Infrastructure.Exceptions;
+using FastAPI.Layers.Infrastructure.Messaging;
 using FastAPI.Layers.Infrastructure.Services;
 using FastAPI.Layers.Persistence;
 
@@ -9,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+
+using StoryBooks.Libraries.Email;
 
 using System.Reflection;
 
@@ -42,7 +45,15 @@ public static class InfrastructureConfigurations
         }
 
         services
-            .AddPersistenceLayer<TDbContext>(configuration, contextAssembly, connectionStringName)
+            .AddSqlServerPersistence<TDbContext>(contextAssembly, connectionStringName)
+            .AddRabbitMQMessaging(contextAssembly)
+            .AddSendGridEmail(configuration, settings =>
+            {
+                settings
+                    .SetApiKey("")
+                    .SetSenderName("")
+                    .SetSenderAddress("");
+            })
             .TryAddScoped<ICurrentUser, CurrentUser>();
 
         return services;

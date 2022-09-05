@@ -1,10 +1,16 @@
-﻿namespace System;
+﻿using System.Text.RegularExpressions;
+
+namespace System;
 
 /// <summary>
 /// Defines extension methods on the <see cref="string"/> class.
 /// </summary>
-public static class StringExtensions
+public static partial class StringExtensions
 {
+    [RegexGenerator("</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*?\"|'.*?'|[^'\">\\s]+))?)+\\s*|\\s*)/?>", RegexOptions.Compiled)]
+    private static partial Regex HtmlTagRegex();
+    private static readonly Regex htmlTagsRegex = HtmlTagRegex();
+
     /// <summary>
     /// Determines whether the instance is composed entirely of whitespace characters.
     /// </summary>
@@ -34,6 +40,16 @@ public static class StringExtensions
 
         var span = value.AsSpan();
         return $"{char.ToUpper(span[0])}{span[1..]}";
+    }
+
+    /// <summary>
+    /// Remove all HTML tags from given string and leave only their content.
+    /// </summary>
+    /// <param name="html">HTML string</param>
+    /// <returns>Stripped HTML</returns>
+    public static string StripHtmlTags(this string html)
+    {
+        return htmlTagsRegex.Replace(html, string.Empty);
     }
 
     /// <summary>

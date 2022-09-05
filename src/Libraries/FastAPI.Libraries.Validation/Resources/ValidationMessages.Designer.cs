@@ -115,6 +115,15 @@ namespace FastAPI.Libraries.Validation.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} must be a valid URL..
+        /// </summary>
+        internal static string ForIsValidUrlErrorMessageFormat {
+            get {
+                return ResourceManager.GetString("ForIsValidUrlErrorMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} must be non-positive..
         /// </summary>
         internal static string ForLessThanOrEqualToZeroErrorMessageFormat {

@@ -135,6 +135,9 @@
   <data name="ForHasOnlyDigitsErrorMessageFormat" xml:space="preserve">
     <value>{0} must contain only digits.</value>
   </data>
+  <data name="ForIsValidUrlErrorMessageFormat" xml:space="preserve">
+    <value>{0} must be a valid URL.</value>
+  </data>
   <data name="ForLessThanOrEqualToZeroErrorMessageFormat" xml:space="preserve">
     <value>{0} must be non-positive.</value>
   </data>

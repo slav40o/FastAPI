@@ -18,5 +18,5 @@ public interface IModifierDetails
     /// <summary>
     /// Gets modification date.
     /// </summary>
-    DateTime ModificationDate { get; init; }
+    DateTimeOffset ModificationDate { get; init; }
 }

@@ -13,5 +13,5 @@ public interface IDomainEvent
     /// <summary>
     /// Gets the instant in time when the event has been raised.
     /// </summary>
-    DateTime OccuredOn { get; }
+    DateTimeOffset OccuredOn { get; }
 }

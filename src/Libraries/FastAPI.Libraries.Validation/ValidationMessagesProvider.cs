@@ -45,4 +45,7 @@ public class ValidationMessagesProvider
 
     internal static string ForHasOnlyDigits(string paramName)
         => string.Format(ValidationMessages.ForHasOnlyDigitsErrorMessageFormat, paramName);
+
+    internal static string ForIsValidUrl(string paramName)
+        => string.Format(ValidationMessages.ForIsValidUrlErrorMessageFormat, paramName);
 }

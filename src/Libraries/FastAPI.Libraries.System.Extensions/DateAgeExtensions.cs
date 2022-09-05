@@ -1,4 +1,4 @@
-﻿namespace System;
+﻿namespace FastAPI.Libraries.System.Extensions;
 
 /// <summary>
 /// Extension methods of <see cref="DateTime"/> and <see cref="DateOnly"/> for calculating age.
@@ -70,7 +70,7 @@ public static class DateAgeExtensions
     private static int CalculateAge(DateOnly birth, DateOnly now)
     {
         int year = now.Year - birth.Year;
-        if (now.Month < birth.Month || (now.Month == birth.Month && now.Day < birth.Day))
+        if (now.Month < birth.Month || now.Month == birth.Month && now.Day < birth.Day)
         {
             year--;
         }
