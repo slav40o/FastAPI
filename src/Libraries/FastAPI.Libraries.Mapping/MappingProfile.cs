@@ -11,7 +11,7 @@ using FastAPI.Libraries.Mapping.Contracts;
 /// <summary>
 /// Custom mapping profile for registering all mapping in the project.
 /// </summary>
-public class MappingProfile : Profile
+public sealed class MappingProfile : Profile
 {
     private const string MappingMethodName = "Mapping";
     private const string IMapFromGenericInterfaceName = "IMapFrom`1";

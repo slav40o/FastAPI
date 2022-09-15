@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Layers.Application.Email.Models;
 
-public class SendEmailModel<TData> where TData : class
+public sealed class SendEmailModel<TData> where TData : class
 {
     public SendEmailModel(string to, string subject, TData model)
     {

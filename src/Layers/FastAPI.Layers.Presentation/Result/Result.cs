@@ -21,7 +21,7 @@ internal class Result
         => new(message, errors);
 }
 
-internal class ErrorResult : Result
+internal sealed class ErrorResult : Result
 {
 	public ErrorResult(string message, IEnumerable<AppError>? errors)
 		: base(message)
@@ -32,7 +32,7 @@ internal class ErrorResult : Result
     public IEnumerable<AppError> Errors { get; init; }
 }
 
-internal class DataResult<TData> : Result
+internal sealed class DataResult<TData> : Result
 {
     public DataResult(string message, TData data)
         : base(message)

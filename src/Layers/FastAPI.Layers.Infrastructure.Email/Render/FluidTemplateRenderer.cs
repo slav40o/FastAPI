@@ -10,7 +10,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 
-public class FluidTemplateRenderer : IEmailTemplateRenderer
+public sealed class FluidTemplateRenderer : IEmailTemplateRenderer
 {
     private readonly EmailTemplateSettings settings;
     private readonly IFileProvider fileProvider;

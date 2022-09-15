@@ -4,7 +4,7 @@ using FastAPI.Layers.Infrastructure.Email.IO;
 
 using Microsoft.Extensions.FileProviders;
 
-public class EmailTemplateSettings
+public sealed class EmailTemplateSettings
 {
     /// <summary>
     /// Liquid views extensions

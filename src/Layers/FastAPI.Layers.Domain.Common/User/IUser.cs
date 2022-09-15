@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Domain.Abstractions;
+﻿namespace FastAPI.Layers.Domain.Common.User;
 
 /// <summary>
 /// General user information interface.

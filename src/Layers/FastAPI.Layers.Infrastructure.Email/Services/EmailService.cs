@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 using System.Threading.Tasks;
 
-public class EmailService : IEmailService
+public sealed class EmailService : IEmailService
 {
     private readonly EmailTemplateSettings settings;
     private readonly IEmailSender emailSender;

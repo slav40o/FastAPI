@@ -2,7 +2,7 @@
 
 using FastAPI.Layers.Application.Email;
 
-public class MockEmailSender : IEmailSender
+public sealed class MockEmailSender : IEmailSender
 {
     public Task<bool> SendEmailAsync(string email, string subject, string htmlMessage)
     {

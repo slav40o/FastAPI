@@ -5,7 +5,7 @@ using Microsoft.Extensions.FileProviders;
 using System;
 using System.IO;
 
-public class EmbededResourceFileInfo : IFileInfo
+public sealed class EmbededResourceFileInfo : IFileInfo
 {
     private long length = 0;
     private bool exists = false;

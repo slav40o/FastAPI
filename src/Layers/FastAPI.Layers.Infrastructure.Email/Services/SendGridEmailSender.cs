@@ -10,9 +10,9 @@ using SendGrid.Helpers.Mail;
 
 using Microsoft.Extensions.Options;
 
-using static FastAPI.Layers.Infrastructure.Email.EmailConstants;
+using FastAPI.Layers.Infrastructure.Email.Resources;
 
-public class SendGridEmailSender : IEmailSender
+public sealed class SendGridEmailSender : IEmailSender
 {
     private readonly SendGridEmailSettings settings;
     private readonly EmailAddress senderAddress;
@@ -35,7 +35,7 @@ public class SendGridEmailSender : IEmailSender
         msg.SetClickTracking(false, false);
 
         var response = await client.SendEmailAsync(msg);
-        Ensure.NotNull<Response, EmailSendingException>(response, nameof(response), message: ErrorMessages.NoReponse);
+        Ensure.NotNull<Response, EmailSendingException>(response, nameof(response), message: EmailErrorMessages.NoReponse);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -49,16 +49,16 @@ public class SendGridEmailSender : IEmailSender
     private static void ValidateEmail(string email, string subject)
     {
         Ensure.IsValidEmail<InvalidEmailException>(email);
-        Ensure.NotEmpty<InvalidEmailException>(subject, nameof(subject), ErrorMessages.SubjectRequired);
+        Ensure.NotEmpty<InvalidEmailException>(subject, nameof(subject), EmailErrorMessages.SubjectRequired);
     }
 
     private static void ValidateSettings(SendGridEmailSettings settings)
     {
         Ensure.NotEmpty<InvalidEmailException>(
-            settings.SenderApiKey, nameof(settings.SenderApiKey), ErrorMessages.ApiKeyMissing);
+            settings.SenderApiKey, nameof(settings.SenderApiKey), EmailErrorMessages.ApiKeyMissing);
         Ensure.NotEmpty<InvalidEmailException>(
-            settings.SenderAddress, nameof(settings.SenderAddress), ErrorMessages.SenderEmailMissing);
+            settings.SenderAddress, nameof(settings.SenderAddress), EmailErrorMessages.SenderEmailMissing);
         Ensure.NotEmpty<InvalidEmailException>(
-            settings.SenderName, nameof(settings.SenderName), ErrorMessages.SenderNameMissing);
+            settings.SenderName, nameof(settings.SenderName), EmailErrorMessages.SenderNameMissing);
     }
 }

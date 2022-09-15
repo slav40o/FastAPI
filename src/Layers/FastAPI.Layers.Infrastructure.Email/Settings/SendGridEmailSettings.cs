@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Layers.Infrastructure.Email.Settings;
 
-public class SendGridEmailSettings
+public sealed class SendGridEmailSettings
 {
     public string SenderApiKey { get; private set; } = default!;
 

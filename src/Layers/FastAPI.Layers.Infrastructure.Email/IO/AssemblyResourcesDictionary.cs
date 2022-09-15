@@ -3,7 +3,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-internal class AssemblyResourcesDictionary
+internal sealed class AssemblyResourcesDictionary
 {
     private readonly HashSet<Assembly> assemblies;
     private readonly Dictionary<string, AssemblyResource> resources;

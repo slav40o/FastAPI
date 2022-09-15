@@ -22,8 +22,8 @@ public static class ApplicationConfigurations
         if (!hasValidationBehaviour)
         {
             services
-                .AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-                // .AddApplicationSettings();
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>))
+                .AddApplicationSettings();
         }
 
         services

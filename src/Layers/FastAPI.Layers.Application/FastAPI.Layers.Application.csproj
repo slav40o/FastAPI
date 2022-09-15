@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\FastAPI.Libraries.Mapping\FastAPI.Libraries.Mapping.csproj" />
-    <ProjectReference Include="..\FastAPI.Layers.Domain\FastAPI.Layers.Domain.csproj" />
+    <ProjectReference Include="..\FastAPI.Layers.Domain.Common\FastAPI.Layers.Domain.Common.csproj" />
   </ItemGroup>
 
 </Project>

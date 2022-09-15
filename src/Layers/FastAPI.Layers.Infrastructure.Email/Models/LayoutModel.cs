@@ -3,7 +3,7 @@
 using FastAPI.Libraries.Validation;
 using FastAPI.Libraries.Validation.Exceptions;
 
-public class LayoutModel
+public sealed class LayoutModel
 {
     public string Content { get; private set; } = default!;
 

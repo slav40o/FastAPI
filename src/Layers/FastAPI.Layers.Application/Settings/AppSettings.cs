@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Layers.Application.Settings;
 
-public class AppSettings
+public sealed class AppSettings
 {
     public string ApiUrl { get; private set; } = default!;
 

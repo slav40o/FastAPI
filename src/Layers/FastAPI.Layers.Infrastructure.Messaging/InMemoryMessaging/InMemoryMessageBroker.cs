@@ -5,7 +5,7 @@ using FastAPI.Layers.Application.Messaging;
 using System;
 using System.Collections.Concurrent;
 
-public class InMemoryMessageBroker : IMessageSubscriber, IMessagePublisher
+public sealed class InMemoryMessageBroker : IMessageSubscriber, IMessagePublisher
 {
     private readonly IDictionary<string, IList<object>> consumers;
 

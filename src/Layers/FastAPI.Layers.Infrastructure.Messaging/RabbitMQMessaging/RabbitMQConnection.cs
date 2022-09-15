@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 
-public class RabbitMQConnection : IDisposable
+public sealed class RabbitMQConnection : IDisposable
 {
     private readonly RabbitMQConnectionSettings settings;
 

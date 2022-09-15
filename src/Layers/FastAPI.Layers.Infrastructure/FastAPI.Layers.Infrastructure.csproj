@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Email\FastAPI.Layers.Infrastructure.Email.csproj" />
 	  <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Messaging\FastAPI.Layers.Infrastructure.Messaging.csproj" />
 	  <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Persistence.SQL\FastAPI.Layers.Infrastructure.Persistence.SQL.csproj" />
 	</ItemGroup>

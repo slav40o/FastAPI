@@ -8,7 +8,7 @@ using System.Reflection;
 /// <summary>
 /// Provides files both from physical file path and from embedder resource path
 /// </summary>
-public class CombinedResourcesFileProvider : IFileProvider
+public sealed class CombinedResourcesFileProvider : IFileProvider
 {
     private readonly IFileProvider physicalFileProvider;
     private readonly AssemblyResourcesDictionary resourceDictionary;

@@ -8,7 +8,7 @@ using RabbitMQ.Client.Events;
 using System.IO;
 using System.Text.Json;
 
-internal class RabbitMQSubscriber : IMessageSubscriber
+internal sealed class RabbitMQSubscriber : IMessageSubscriber
 {
     private readonly IModel channel;
 

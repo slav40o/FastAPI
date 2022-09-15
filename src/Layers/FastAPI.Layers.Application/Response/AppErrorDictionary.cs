@@ -3,7 +3,7 @@
 /// <summary>
 /// Dictionary holding result errors.
 /// </summary>
-public class AppErrorDictionary
+public sealed class AppErrorDictionary
 {
     private readonly IDictionary<string, AppError> errors;
 

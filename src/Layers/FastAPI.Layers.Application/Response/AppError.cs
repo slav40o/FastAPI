@@ -3,7 +3,7 @@
 /// <summary>
 /// Holds error value used in <see cref="AppResponse" and <see cref="AppResponse{TData}"/>/>.
 /// </summary>
-public class AppError
+public sealed class AppError
 {
     /// <summary>
     /// Key for storing all general(key-less) errors.

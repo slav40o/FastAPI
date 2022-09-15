@@ -7,7 +7,7 @@ using RabbitMQ.Client;
 using System;
 using System.Text.Json;
 
-public class RabbitMQPublisher : IMessagePublisher
+public sealed class RabbitMQPublisher : IMessagePublisher
 {
     private readonly IModel channel;
 

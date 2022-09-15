@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Layers.Infrastructure.Messaging.RabbitMQMessaging;
 
-internal class SubscriberMetaData
+internal sealed class SubscriberMetaData
 {
     public string QueueName { get; init; } = default!;
 

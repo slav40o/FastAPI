@@ -12,7 +12,7 @@ using System.Security.Claims;
 /// <summary>
 /// Holds information about the current user performing the request to the server.
 /// </summary>
-public class CurrentUser : ICurrentUser
+public sealed class CurrentUser : ICurrentUser
 {
     private const string NoUserMessage = "This request does not have an authenticated user.";
 

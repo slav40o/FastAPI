@@ -67,10 +67,10 @@ public static class Ensure
         HasValidFormat<TException>(email, ValidationConstants.Email.Format, nameof(email));
     }
 
-    public static void IsValidPhoneNumber<TException>(string email)
+    public static void IsValidPhoneNumber<TException>(string phone)
         where TException : ValidationException, new()
     {
-        HasValidFormat<TException>(email, ValidationConstants.Phone.Format, nameof(email));
+        HasValidFormat<TException>(phone, ValidationConstants.Phone.Format, nameof(phone));
     }
 
     public static void HasOnlyDigits<TException>(string value, string paramName, string? errorMessage = null)

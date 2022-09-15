@@ -83,7 +83,7 @@ public class AppResponse
         => New().WithMessage(message).WithGlobalError(message).WithFailureType(failure).WithErrors(errors);
 }
 
-public class AppResponse<TData> : AppResponse
+public sealed class AppResponse<TData> : AppResponse
 {
     public TData? Data { get; private set; } = default!;
 

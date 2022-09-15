@@ -2,7 +2,7 @@
 
 using FastAPI.Layers.Application.Email;
 
-internal class MockTemplateRenderer : IEmailTemplateRenderer
+internal sealed class MockTemplateRenderer : IEmailTemplateRenderer
 {
     public string Extension => ".txt";
 

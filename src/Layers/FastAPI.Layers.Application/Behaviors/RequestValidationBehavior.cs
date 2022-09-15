@@ -11,7 +11,7 @@ using Response;
 using System.Threading;
 using System.Threading.Tasks;
 
-public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public sealed class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>, IHaveValidation
 {
     private readonly IEnumerable<IValidator<TRequest>> validators;

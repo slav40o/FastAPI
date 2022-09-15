@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Layers.Infrastructure.Messaging.RabbitMQMessaging;
 
-public class RabbitMQConnectionSettings
+public sealed class RabbitMQConnectionSettings
 {
     public string ClientProvidedName { get; set; } = "DefaultClientName";
 
