@@ -1,8 +1,10 @@
 ﻿namespace FastAPI.Layers.Domain;
 
 using FastAPI.Layers.Domain.Builders;
-
+using FastAPI.Layers.Domain.Events;
+using FastAPI.Layers.Domain.Events.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using System.Reflection;
 
@@ -23,6 +25,8 @@ public static class DomainConfigurations
             .AddClasses(c => c.AssignableTo(typeof(IBuilder<>)))
             .AsImplementedInterfaces()
             .WithScopedLifetime());
+
+        services.TryAddTransient<IDomainEventDispatcher, DomainEventDispatcher>();
 
         return services;
     }

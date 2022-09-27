@@ -1,4 +1,4 @@
-﻿namespace StoryBooks.Libraries.Email;
+﻿namespace FastAPI.Layers.Infrastructure.Email;
 
 using FastAPI.Layers.Application.Email;
 using FastAPI.Layers.Infrastructure.Email.Models;

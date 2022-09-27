@@ -14,7 +14,7 @@ public static class DomainCommonConfiguration
     /// <param name="services">Application services.</param>
     /// <param name="contextAssembly">Context assembly.</param>
     /// <returns>Application services with registered domain layer.</returns>
-    public static IServiceCollection AddCommonDomainLayer(
+    public static IServiceCollection AddCommonDomainEntities(
         this IServiceCollection services,
         Assembly contextAssembly)
     {

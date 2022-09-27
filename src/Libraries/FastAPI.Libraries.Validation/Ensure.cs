@@ -70,6 +70,8 @@ public static class Ensure
     public static void IsValidPhoneNumber<TException>(string phone)
         where TException : ValidationException, new()
     {
+        HasMinLength<TException>(phone, ValidationConstants.Phone.MinLength, nameof(phone));
+        HasMaxLength<TException>(phone, ValidationConstants.Phone.MaxLength, nameof(phone));
         HasValidFormat<TException>(phone, ValidationConstants.Phone.Format, nameof(phone));
     }
 

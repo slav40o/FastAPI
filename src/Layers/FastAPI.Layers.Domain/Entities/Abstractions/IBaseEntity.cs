@@ -1,6 +1,7 @@
 ﻿namespace FastAPI.Layers.Domain.Entities.Abstractions;
 
 using Events;
+using FastAPI.Layers.Domain.Events.Abstractions;
 
 /// <summary>
 /// Entity base.

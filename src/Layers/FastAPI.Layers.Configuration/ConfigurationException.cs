@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Infrastructure.Exceptions;
+﻿namespace FastAPI.Layers.Configuration;
 
 public class ConfigurationException : Exception
 {

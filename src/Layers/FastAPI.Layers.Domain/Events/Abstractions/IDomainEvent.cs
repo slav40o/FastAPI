@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Domain.Events;
+﻿namespace FastAPI.Layers.Domain.Events.Abstractions;
 
 /// <summary>
 /// Represents a Domain-level event - a simple POCO class, modeling an occurrence in the domain.
@@ -13,5 +13,5 @@ public interface IDomainEvent
     /// <summary>
     /// Gets the instant in time when the event has been raised.
     /// </summary>
-    DateTimeOffset OccuredOn { get; }
+    DateTime OccuredOn { get; }
 }

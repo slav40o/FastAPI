@@ -2,6 +2,7 @@
 
 using Abstractions;
 using Events;
+using FastAPI.Layers.Domain.Events.Abstractions;
 
 /// <summary>
 /// Base entity class.

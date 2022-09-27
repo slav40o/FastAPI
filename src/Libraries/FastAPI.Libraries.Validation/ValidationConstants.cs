@@ -15,7 +15,7 @@ public static partial class ValidationConstants
     public static partial class Phone
     {
         public const int MinLength = 5;
-        public const int MaxLength = 20;
+        public const int MaxLength = 16;
         public static readonly Regex Format = PhoneFormatRegex();
 
         [RegexGenerator("^([+]?[\\s0-9]+)?(\\d{3}|[(]?[0-9]+[)])?([-]?[\\s]?[0-9])+$", RegexOptions.Compiled)]
@@ -32,7 +32,7 @@ public static partial class ValidationConstants
         private static partial Regex EmailFormatRegex();
     }
 
-    public static class User
+    public static class Human
     {
         public const int MaxNameLength = 50;
 
