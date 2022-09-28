@@ -10,5 +10,5 @@ public interface IDbInitializer
     /// <summary>
     /// Initializes the db initializer.
     /// </summary>
-    void Initialize();
+    Task Initialize();
 }

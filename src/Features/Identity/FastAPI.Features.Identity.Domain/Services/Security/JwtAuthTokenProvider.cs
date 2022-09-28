@@ -13,7 +13,7 @@ using System.Text;
 
 
 /// <inheritdoc />
-public class JwtAuthTokenProvider : IAuthTokenProvider
+public sealed class JwtAuthTokenProvider : IAuthTokenProvider
 {
     private const string AuthenticationSecretKey = "Authentication:Secret";
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <summary>
 /// User entity db configuration.
 /// </summary>
-public class UserConfiguration : IEntityTypeConfiguration<User>
+public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {
     /// <summary>
     /// Configure user entity.

@@ -3,7 +3,7 @@
 /// <summary>
 /// Identity settings data coming from app settings json and secret stores.
 /// </summary>
-public class IdentitySettings
+public sealed class IdentitySettings
 {
     /// <summary>
     /// Gets array of user emails that will require admin role on registration.

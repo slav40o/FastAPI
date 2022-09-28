@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Layers.Configuration;
 
-public class ConfigurationException : Exception
+public sealed class ConfigurationException : Exception
 {
 	public ConfigurationException()
 	{

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using FastAPI.Layers.Persistence.Events;
 using System.Threading.Tasks;
 using MediatR;
+using FastAPI.Layers.Domain.Events.Abstractions;
 
 /// <summary>
 /// Base DB context.
@@ -13,17 +14,17 @@ using MediatR;
 public abstract class BaseDbContext<TContext> : DbContext, IEventDbContext
     where TContext : DbContext
 {
-    private readonly IMediator mediator;
+    private readonly IDomainEventDispatcher dispatcher;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TContext"/> class.
     /// </summary>
     /// <param name="options">DB context options.</param>
-    /// <param name="mediator">Mediator for Event dispatching.</param>
-    public BaseDbContext(DbContextOptions<TContext> options, IMediator mediator)
+    /// <param name="dispatcher">Event dispatching.</param>
+    public BaseDbContext(DbContextOptions<TContext> options, IDomainEventDispatcher dispatcher)
         : base(options)
     {
-        this.mediator = mediator;
+        this.dispatcher = dispatcher;
     }
 
     /// <summary>
@@ -37,7 +38,7 @@ public abstract class BaseDbContext<TContext> : DbContext, IEventDbContext
     /// <inheritdoc/>
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        await this.DispatchEvents(this.mediator);
+        await this.DispatchEvents(this.dispatcher);
         return await base.SaveChangesAsync(cancellationToken);
     }
 

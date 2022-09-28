@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using FastAPI.Features.Identity.Domain.Entities;
 
 /// <inheritdoc />
-public class UserManager : IUserManager
+public sealed class UserManager : IUserManager
 {
     private readonly UserManager<User> manager;
 

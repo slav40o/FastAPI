@@ -2,11 +2,15 @@
 
 public sealed class AppSettings
 {
-    public string ApiUrl { get; private set; } = default!;
+    public string ApiVersion { get; init; } = default!;
 
-    public string ClientUrl { get; private set; } = default!;
+    public string ApiName { get; init; } = default!;
 
-    public string AdminRoleName { get; private set; } = default!;
+    public string ApiUrl { get; init; } = default!;
 
-    public string[] RequiredRoles { get; private set; } = default!;
+    public string ClientUrl { get; init; } = default!;
+
+    public string AdminRoleName { get; init; } = default!;
+
+    public string[] Roles { get; init; } = default!;
 }

@@ -1,5 +1,4 @@
-﻿
-namespace YarilloFramework.Identity.Domain.Repositories;
+﻿namespace FastAPI.Features.Identity.Domain.Repositories;
 
 using FastAPI.Features.Identity.Domain.Entities;
 using FastAPI.Layers.Domain.Repositories;

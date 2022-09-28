@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Features.Identity.Application.Services;
+﻿namespace FastAPI.Layers.Application;
 
 /// <summary>
 /// HTTP utilities service.

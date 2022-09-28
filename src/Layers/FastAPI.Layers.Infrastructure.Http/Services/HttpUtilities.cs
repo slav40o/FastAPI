@@ -1,11 +1,10 @@
-﻿namespace FastAPI.Features.Identity.Infrastructure.Services;
+﻿namespace FastAPI.Layers.Infrastructure.Http.Services;
 
-using FastAPI.Features.Identity.Application.Services;
-
+using FastAPI.Layers.Application;
 using System.Web;
 
 /// <inheritdoc />
-public class HttpUtilities : IHttpUtilities
+public sealed class HttpUtilities : IHttpUtilities
 {
     /// <inheritdoc />
     public string? UrlDecode(string? url)

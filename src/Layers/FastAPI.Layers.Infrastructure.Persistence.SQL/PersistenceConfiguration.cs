@@ -9,7 +9,7 @@ public static class PersistenceConfiguration
 {
     public static IServiceCollection AddSqlServerPersistence<TContextType>(
         this IServiceCollection services,
-        Assembly contextAssembly,
+        Assembly infrastructureAssembly,
         string connectionString)
             where TContextType : DbContext
     {
@@ -19,8 +19,8 @@ public static class PersistenceConfiguration
                 options
                     .UseSqlServer(connectionString, sb => sb.MigrationsAssembly(typeof(TContextType).Assembly.FullName));
             })
-            .AddRepositories(contextAssembly)
-            .AddDbInitializers(contextAssembly);
+            .AddRepositories(infrastructureAssembly)
+            .AddDbInitializers(infrastructureAssembly);
 
         return services;
     }

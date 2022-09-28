@@ -8,6 +8,7 @@ using FluentValidation;
 
 using MediatR;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using System.Reflection;
@@ -16,24 +17,20 @@ public static class ApplicationConfigurations
 {
     public static IServiceCollection AddApplicationLayer(
         this IServiceCollection services,
-        Assembly contextAssembly)
+        Assembly applicationAssembly)
     {
         bool hasValidationBehaviour = services.Any(x => x.ImplementationType == typeof(RequestValidationBehavior<,>));
         if (!hasValidationBehaviour)
         {
             services
-                .AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>))
-                .AddApplicationSettings();
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
         }
 
         services
-            .AddMappingProfiles(contextAssembly)
-            .AddValidatorsFromAssembly(contextAssembly)
-            .AddMediatR(config => config.AsScoped(), contextAssembly);
+            .AddMappingProfiles(applicationAssembly)
+            .AddValidatorsFromAssembly(applicationAssembly)
+            .AddMediatR(config => config.AsScoped(), applicationAssembly);
 
         return services;
     }
-
-    private static IServiceCollection AddApplicationSettings(this IServiceCollection services)
-        => services.ConfigureOptions<AppSettings>();
 }

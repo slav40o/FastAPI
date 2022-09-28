@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Layers\FastAPI.Layers.Presentation\FastAPI.Layers.Presentation.csproj" />
+    <ProjectReference Include="..\FastAPI.Features.Identity.Application\FastAPI.Features.Identity.Application.csproj" />
+  </ItemGroup>
+
+</Project>

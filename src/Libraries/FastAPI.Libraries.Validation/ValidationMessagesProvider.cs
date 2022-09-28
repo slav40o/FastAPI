@@ -2,7 +2,7 @@
 
 using FastAPI.Libraries.Validation.Resources;
 
-public class ValidationMessagesProvider
+public sealed class ValidationMessagesProvider
 {
     internal static string ForNullValue(string paramName)
         => string.Format(ValidationMessages.NullValueErrorMessageFormat, paramName);

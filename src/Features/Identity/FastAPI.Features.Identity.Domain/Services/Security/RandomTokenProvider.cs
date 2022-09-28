@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 /// <summary>
 /// Random token provider based on <see cref="RandomNumberGenerator"/>.
 /// </summary>
-public class RandomTokenProvider : IRandomTokenProvider
+public sealed class RandomTokenProvider : IRandomTokenProvider
 {
     /// <inheritdoc/>
     public string GenerateRandomToken(int byteArrayLengtht = 64)

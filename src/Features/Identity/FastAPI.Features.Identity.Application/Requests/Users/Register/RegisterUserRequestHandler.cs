@@ -8,6 +8,7 @@ using FastAPI.Features.Identity.Domain.Entities;
 using FastAPI.Features.Identity.Domain.Services.Auth;
 using FastAPI.Features.Identity.Domain.Services.Security;
 using FastAPI.Features.Identity.Domain.Services.Users;
+using FastAPI.Layers.Application;
 using FastAPI.Layers.Application.Handlers;
 using FastAPI.Layers.Application.Response;
 using FastAPI.Layers.Application.Settings;

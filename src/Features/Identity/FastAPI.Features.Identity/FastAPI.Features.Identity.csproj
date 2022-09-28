@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FastAPI.Features.Identity.Infrastructure\FastAPI.Features.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\FastAPI.Features.Identity.Presentation\FastAPI.Features.Identity.Presentation.csproj" />
+  </ItemGroup>
+
+
 </Project>

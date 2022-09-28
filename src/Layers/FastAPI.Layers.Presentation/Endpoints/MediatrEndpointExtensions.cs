@@ -19,6 +19,7 @@ using System.Text;
 public static class MediatrEndpointExtensions
 {
     private const string PathDelimeter = "/";
+    private static readonly HashSet<string> PrivatePathWords = new() { "api" };
 
     public static WebApplication MediateRequest<TRequest>(this WebApplication app, string path)
         where TRequest : IAppRequest
@@ -162,7 +163,11 @@ public static class MediatrEndpointExtensions
 
     private static string GetRequestTag(string path)
     {
-        var pathParts = path.Split(PathDelimeter, StringSplitOptions.RemoveEmptyEntries);
+        var pathParts = path
+            .Split(PathDelimeter, StringSplitOptions.RemoveEmptyEntries)
+            .Where(p => !PrivatePathWords.Contains(p))
+            .ToArray();
+
         if (pathParts.Length == 0)
         {
             return string.Empty;

@@ -9,6 +9,7 @@ using Fluid;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 public static class EmailConfigurationExtensions
 {
@@ -26,18 +27,17 @@ public static class EmailConfigurationExtensions
             .AddTemplateSettings()
             .AddFluidTemplates()
             .AddEmailLayout(configuration)
-            .AddTransient<IEmailService, EmailService>();
+            .TryAddTransient<IEmailService, EmailService>();
 
         return services;
     }
 
     public static IServiceCollection AddMockEmail(this IServiceCollection services)
     {
-        services
-            .AddTemplateSettings()
-            .AddTransient<IEmailTemplateRenderer, MockTemplateRenderer>()
-            .AddTransient<IEmailSender, MockEmailSender>()
-            .AddTransient<IEmailService, EmailService>();
+        services.AddTemplateSettings();
+        services.TryAddTransient<IEmailTemplateRenderer, MockTemplateRenderer>();
+        services.TryAddTransient<IEmailSender, MockEmailSender>();
+        services.TryAddTransient<IEmailService, EmailService>();
 
         return services;
     }
@@ -55,11 +55,17 @@ public static class EmailConfigurationExtensions
             });
 
     private static IServiceCollection AddSendGrid(this IServiceCollection services)
-        => services.AddTransient<IEmailSender, SendGridEmailSender>();
+    {
+        services.TryAddTransient<IEmailSender, SendGridEmailSender>();
+        return services;
+    }
 
     private static IServiceCollection AddFluidTemplates(this IServiceCollection services)
     {
-        return services.AddSingleton<FluidParser>()
-                       .AddTransient<IEmailTemplateRenderer, FluidTemplateRenderer>();
+        services.TryAddSingleton<FluidParser>();
+        services.TryAddTransient<IEmailTemplateRenderer, FluidTemplateRenderer>();
+
+        return services;
+                       
     }
 }

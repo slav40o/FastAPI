@@ -1,6 +1,6 @@
 ﻿namespace System;
 
-public class FastAPIDateTime : IDateTime
+public sealed class FastAPIDateTime : IDateTime
 {
     private static readonly AsyncLocal<Func<DateTime>?> overrideNowFunc = new();
     private static readonly AsyncLocal<Func<DateTime>?> overrideUtcNowFunc = new();
