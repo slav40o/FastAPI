@@ -154,6 +154,20 @@ public abstract class Enumeration : IComparable
     public int CompareTo(object? other)
         => this.Value.CompareTo(((Enumeration)other!).Value);
 
+    /// <summary>
+    /// Try parse string value and get an Enumeration instance.
+    /// </summary>
+    /// <typeparam name="TEnumeration">Enumeration type.</typeparam>
+    /// <param name="valueOrName">String value.</param>
+    /// <param name="enumeration">Parsed enumeration value.</param>
+    /// <returns>True if value is parsed successfully.</returns>
+    public static bool TryParse<TEnumeration>(
+        string valueOrName,
+        out TEnumeration enumeration)
+            where TEnumeration : Enumeration
+                => TryParse(item => item.Name == valueOrName, out enumeration!) || 
+                   (int.TryParse(valueOrName, out var value) && TryParse(item => item.Value == value, out enumeration!));
+
     private static T Parse<T, TValue>(TValue value, string description, Func<T, bool> predicate)
         where T : Enumeration
     {
@@ -165,5 +179,14 @@ public abstract class Enumeration : IComparable
         }
 
         return matchingItem;
+    }
+
+    private static bool TryParse<TEnumeration>(
+        Func<TEnumeration, bool> predicate,
+        out TEnumeration? enumeration)
+            where TEnumeration : Enumeration
+    {
+        enumeration = GetAll<TEnumeration>().FirstOrDefault(predicate);
+        return enumeration != null;
     }
 }

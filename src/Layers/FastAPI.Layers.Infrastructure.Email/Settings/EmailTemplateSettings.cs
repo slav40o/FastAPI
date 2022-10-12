@@ -1,34 +1,32 @@
 ﻿namespace FastAPI.Layers.Infrastructure.Email.Settings;
 
-using FastAPI.Layers.Infrastructure.Email.IO;
-
-using Microsoft.Extensions.FileProviders;
-
+/// <summary>
+/// Holds settings information used from <see cref="ITemplateRenderer.cs"/>.
+/// </summary>
 public sealed class EmailTemplateSettings
 {
     /// <summary>
-    /// Liquid views extensions
+    /// Gets template files extension including the dot.
     /// </summary>
-    public string ViewExtension { get; private set; }
-        = ".html";
+    public string TemplatetExtension { get; init; } = ".html";
 
     /// <summary>
-    /// Naming convention for template model class name
+    /// Gets layout template name without the file extension.
     /// </summary>
-    public string ModelNameSuffix { get; private set; }
-        = "Model";
+    public string LayoutViewName { get; init; } = "_EmailLayout";
 
     /// <summary>
-    /// Email layout view name
+    /// Gets layout file name with the extension.
     /// </summary>
-    public string EmailLayoutViewName { get; private set; }
-        = "_Layout";
+    public string LayoutViewFileName => $"{LayoutViewName}{TemplatetExtension}";
 
     /// <summary>
-    /// Define file provider that is used form the template renderer
+    /// Gets the common template file name suffix.
     /// </summary>
-    public IFileProvider FileProvider { get; private set; }
-        = new CombinedResourcesFileProvider(AppDomain.CurrentDomain.BaseDirectory);
+    public string ViewNameSuffix { get; init; } = "Template";
 
-    public void SetFileProvider(IFileProvider fileProvider) => FileProvider = fileProvider;
+    /// <summary>
+    /// Gets the common data class file name suffix.
+    /// </summary>
+    public string DataModelNameSuffix { get; init; } = "EmailModel";
 }

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using FastAPI.Features.Identity.Domain.Entities;
+using FastAPI.Features.Identity.Domain.Events;
 
 /// <inheritdoc />
 public sealed class UserManager : IUserManager
@@ -45,8 +46,16 @@ public sealed class UserManager : IUserManager
         => manager.ConfirmEmailAsync(user, token);
 
     /// <inheritdoc />
-    public Task<IdentityResult> CreateAsync(User user, string password)
-        => manager.CreateAsync(user, password);
+    public async Task<IdentityResult> CreateAsync(User user, string password)
+    {
+        var result = await manager.CreateAsync(user, password);
+        if (result.Succeeded)
+        {
+            user.AddEvent(new UserCreatedEvent(user));
+        }
+
+        return result;
+    }
 
     /// <inheritdoc />
     public Task DeleteAsync(User user)

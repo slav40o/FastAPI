@@ -120,10 +120,22 @@
   <data name="ConfirmPasswordNotMatching" xml:space="preserve">
     <value>'Confirm Password' must be equal to the 'Password' field.</value>
   </data>
+  <data name="InvalidUserAccess" xml:space="preserve">
+    <value>Invalid request access!</value>
+  </data>
   <data name="RegistrationFailed" xml:space="preserve">
     <value>User registration failed.</value>
   </data>
   <data name="RegistrationSucceeded" xml:space="preserve">
     <value>User registered successfully.</value>
+  </data>
+  <data name="UpdateDetailsError" xml:space="preserve">
+    <value>Error occurred while updating your details.</value>
+  </data>
+  <data name="UpdateDetailsSuccess" xml:space="preserve">
+    <value>Your account details are updated.</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found!</value>
   </data>
 </root>

@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 
 using System;
+using System.Reflection;
 using System.Text;
 
 public static class ApplicationBuilderConfiguration
@@ -19,8 +19,23 @@ public static class ApplicationBuilderConfiguration
     private const string SecretKey = "Authentication:Secret";
     private const string ApiNameKey = "AppSettings:ApiName";
     private const string ApiVersionKey = "AppSettings:ApiVersion";
+    private const string SendGridApiKey = "EmailSettings:ApiKey";
 
     public static WebApplicationBuilder ConfigureApplicationServices(this WebApplicationBuilder builder)
+    {
+        // Add shared infrastructure services here
+        builder.ConfigureCommonApplicationServices(IdentityConfigurations.GetEmailAssemblies());
+
+        // Add application features here
+        builder.Services
+            .AddIdentityFeature(builder.Configuration);
+
+        return builder;
+    }
+
+    private static void ConfigureCommonApplicationServices(
+        this WebApplicationBuilder builder,
+        params Assembly[] emailAssemblies)
     {
         if (builder.Environment.IsDevelopment())
         {
@@ -45,17 +60,17 @@ public static class ApplicationBuilderConfiguration
         // Add shared infrastructure services here
         builder.Services
             .Configure<AppSettings>(builder.Configuration.GetSection(nameof(AppSettings)))
-            .AddMockEmail()
+            .AddEmail(cfg =>
+            {
+                cfg.ApiKey = builder.Configuration.GetValue<string>(SendGridApiKey)!;
+                cfg.ClientURL = "https://www.google.bg/";
+                cfg.SenderName = "Slavi Tsvetanov";
+                cfg.SenderAddress = "slavicvetanov@gmail.com";
+            }, emailAssemblies)
             // .AddRabbitMqMessaging()
             // .AddAzureDocumentStorage()
             // .AddDistributedRedisCache()
             .AddHttpInfrastructureLayer();
-
-        // Add application features here
-        builder.Services
-            .AddIdentityFeature(builder.Configuration);
-
-        return builder;
     }
 
     private static IServiceCollection AddAuthentication(

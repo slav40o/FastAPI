@@ -70,6 +70,15 @@ namespace FastAPI.Features.Identity.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid request access!.
+        /// </summary>
+        internal static string InvalidUserAccess {
+            get {
+                return ResourceManager.GetString("InvalidUserAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User registration failed..
         /// </summary>
         internal static string RegistrationFailed {
@@ -84,6 +93,33 @@ namespace FastAPI.Features.Identity.Application.Resources {
         internal static string RegistrationSucceeded {
             get {
                 return ResourceManager.GetString("RegistrationSucceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occurred while updating your details..
+        /// </summary>
+        internal static string UpdateDetailsError {
+            get {
+                return ResourceManager.GetString("UpdateDetailsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your account details are updated..
+        /// </summary>
+        internal static string UpdateDetailsSuccess {
+            get {
+                return ResourceManager.GetString("UpdateDetailsSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User not found!.
+        /// </summary>
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }
     }

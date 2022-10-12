@@ -2,12 +2,12 @@
 
 public sealed class FastAPIDateTime : IDateTime
 {
-    private static readonly AsyncLocal<Func<DateTime>?> overrideNowFunc = new();
-    private static readonly AsyncLocal<Func<DateTime>?> overrideUtcNowFunc = new();
+    private static readonly AsyncLocal<Func<DateTimeOffset>?> overrideNowFunc = new();
+    private static readonly AsyncLocal<Func<DateTimeOffset>?> overrideUtcNowFunc = new();
 
-    public static DateTime Now => overrideNowFunc.Value != null ? overrideNowFunc.Value() : DateTime.Now;
+    public static DateTimeOffset Now => overrideNowFunc.Value != null ? overrideNowFunc.Value() : DateTimeOffset.Now;
 
-    public static DateTime UtcNow => overrideUtcNowFunc.Value != null ? overrideUtcNowFunc.Value() : DateTime.Now;
+    public static DateTimeOffset UtcNow => overrideUtcNowFunc.Value != null ? overrideUtcNowFunc.Value() : DateTimeOffset.UtcNow;
 
     public static void ResetOverride()
     {
@@ -15,14 +15,7 @@ public sealed class FastAPIDateTime : IDateTime
         overrideUtcNowFunc.Value = null;
     }
 
-    /*
-     * Example:
-     *  FastAPIDateTime.SetOverride(d => new DateTime(2000, 1, 1), d => new DateTime(2000, 1, 1))
-     *  FastAPIDateTime.Now();
-     *  FastAPIDateTime.ResetToNormal();
-     *  FastAPIDateTime.Now();
-     */
-    public static void SetOverride(Func<DateTime> now, Func<DateTime> utcNow)
+    public static void SetOverride(Func<DateTimeOffset> now, Func<DateTimeOffset> utcNow)
     {
         overrideNowFunc.Value = now;
         overrideUtcNowFunc.Value = utcNow;

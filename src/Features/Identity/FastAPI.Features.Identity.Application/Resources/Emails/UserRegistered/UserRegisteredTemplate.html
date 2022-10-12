@@ -1,0 +1,9 @@
+﻿<div>
+    Hi, {{Name}}!
+    <p>In order to activate </p>
+    <form method="post" action="{{ConfirmationUrl}}" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="UsereId" value="{{Id}}" />
+        <input type="hidden" name="Token" value="{{ConfirmationToken}}" />
+        <button type="submit">Confirm email</button>
+    </form>
+</div>

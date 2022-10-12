@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Persistence.Events;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL.Events;
 
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 

@@ -2,11 +2,11 @@
 
 public interface IDateTime
 {
-    static abstract DateTime Now { get; }
+    static abstract DateTimeOffset Now { get; }
 
-    static abstract DateTime UtcNow { get; }
+    static abstract DateTimeOffset UtcNow { get; }
 
-    static abstract void SetOverride(Func<DateTime> now, Func<DateTime> utcNow);
+    static abstract void SetOverride(Func<DateTimeOffset> now, Func<DateTimeOffset> utcNow);
 
     static abstract void ResetOverride();
 }

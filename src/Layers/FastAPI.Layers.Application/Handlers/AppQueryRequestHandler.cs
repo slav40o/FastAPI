@@ -13,13 +13,13 @@ public abstract class AppQueryRequestHandler<TRequest, TListItem> : IRequestHand
 {
     public async Task<AppResponse<IPageData<TListItem>>> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        var listItems = await this.HandleRequest(request, cancellationToken);
+        var itemsQuery = await this.HandleRequest(request, cancellationToken);
 
-        listItems = listItems
+        itemsQuery = itemsQuery
             .Skip(request.PageSize * (request.PageNumber - 1))
             .Take(request.PageSize);
 
-        IPageData<TListItem> pageData = new PageData<TListItem>(request.PageNumber, request.PageSize, listItems);
+        IPageData<TListItem> pageData = new PageData<TListItem>(request.PageNumber, request.PageSize, itemsQuery);
 
         return AppResponse.Success(string.Empty, pageData);
     }

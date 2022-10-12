@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Persistence;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL;
 
 using System;
 

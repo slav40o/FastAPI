@@ -1,7 +1,9 @@
-﻿namespace FastAPI.Layers.Persistence.Events;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL.Events;
 
 using FastAPI.Layers.Domain.Entities.Abstractions;
 using FastAPI.Layers.Domain.Events.Abstractions;
+
+using MediatR;
 
 /// <summary>
 /// Db context extensions.
@@ -14,7 +16,7 @@ public static class DbContextEventsExtensions
     /// <param name="context">Db Context.</param>
     /// <param name="dispatcher">Event dispatcher.</param>
     /// <returns>Performed task.</returns>
-    public static async Task DispatchEvents(this IEventDbContext context, IDomainEventDispatcher dispatcher)
+    public static async Task DispatchEvents(this IEventDbContext context, IMediator dispatcher)
     {
         var entities = context.ChangeTracker
             .Entries<IBaseEntity>()
@@ -28,7 +30,7 @@ public static class DbContextEventsExtensions
 
             foreach (var domainEvent in events)
             {
-                await dispatcher.Dispatch(domainEvent);
+                await dispatcher.Publish(domainEvent);
             }
 
             entity.ClearEvents();

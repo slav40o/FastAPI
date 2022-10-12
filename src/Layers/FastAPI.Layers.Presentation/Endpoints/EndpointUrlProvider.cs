@@ -24,9 +24,15 @@ public sealed class EndpointUrlProvider : IUrlProvider
 
 	public string ClientUrl => this.settings.ClientUrl;
 
-	public string GetRequestUrl<TRequest>(object args) where TRequest : AppRequest
+    public string GetRequestUrl<TRequest>() where TRequest : AppRequest
+		=> $"{this.ApiUrl}{this.linkGenerator.GetPathByName(typeof(TRequest).Name, values: new { })}";
+
+    public string GetRequestUrl<TRequest>(object args) where TRequest : AppRequest
         => $"{this.ApiUrl}{this.linkGenerator.GetPathByName(typeof(TRequest).Name, values: args)}";
-    
-	public string GetRequestUrl<TRequest, TResponseModel>(object args) where TRequest : AppRequest<TResponseModel>
+
+    public string GetRequestUrl<TRequest, TResponseModel>() where TRequest : AppRequest<TResponseModel>
+		=> $"{this.ApiUrl}{this.linkGenerator.GetPathByName(typeof(TRequest).Name, values: new { })}";
+
+    public string GetRequestUrl<TRequest, TResponseModel>(object args) where TRequest : AppRequest<TResponseModel>
         => $"{this.ApiUrl}{this.linkGenerator.GetPathByName(typeof(TRequest).Name, values: args)}";
 }

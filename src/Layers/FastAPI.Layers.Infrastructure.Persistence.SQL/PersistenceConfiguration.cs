@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Persistence.SQL;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

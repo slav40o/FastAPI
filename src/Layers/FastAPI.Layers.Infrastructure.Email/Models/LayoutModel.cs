@@ -1,30 +1,43 @@
 ﻿namespace FastAPI.Layers.Infrastructure.Email.Models;
 
+using FastAPI.Layers.Infrastructure.Email.Abstractions;
+using FastAPI.Layers.Infrastructure.Email.Exceptions;
 using FastAPI.Libraries.Validation;
-using FastAPI.Libraries.Validation.Exceptions;
 
-public sealed class LayoutModel
+/// <summary>
+/// Layout model for the Layout email view.
+/// </summary>
+public sealed class LayoutModel : IEmailLayoutModel
 {
-    public string Content { get; private set; } = default!;
+    /// <inheritdoc/>
+    public string Content { get; set; } = default!;
 
+    /// <summary>
+    /// Gets client URL.
+    /// </summary>
     public string ClientUrl { get; private set; } = default!;
 
+    /// <summary>
+    /// Gets terms of use URL.
+    /// </summary>
     public string TermsUrl { get; private set; } = default!;
 
+    /// <summary>
+    /// Gets privacy policy URL.
+    /// </summary>
     public string PrivacyUrl { get; private set; } = default!;
 
-    public LayoutModel SetContent(string content)
-    {
-        this.Content = content;
-        return this;
-    }
-
+    /// <summary>
+    /// Set client URL that will be filled in the layout page.
+    /// </summary>
+    /// <param name="clientUrl">Client URL.</param>
+    /// <returns>Current instance.</returns>
     public LayoutModel SetClientUrl(string clientUrl)
     {
-        Ensure.IsValidUrl<ValidationException>(clientUrl, nameof(clientUrl));
+        Ensure.IsValidUrl<InvalidClientUrlException>(clientUrl, nameof(clientUrl));
         this.ClientUrl = clientUrl;
-        this.PrivacyUrl = $"{clientUrl}/privacy-policy";
-        this.TermsUrl = $"{clientUrl}/terms-of-use";
+        this.PrivacyUrl = $"{clientUrl}/privacy";
+        this.TermsUrl = $"{clientUrl}/terms";
         return this;
     }
 }

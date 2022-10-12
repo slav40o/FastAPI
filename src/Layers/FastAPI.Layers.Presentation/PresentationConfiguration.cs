@@ -4,6 +4,7 @@ using FastAPI.Layers.Application.Services;
 using FastAPI.Layers.Infrastructure.Http.Services;
 using FastAPI.Layers.Presentation.Endpoints;
 
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -26,4 +27,17 @@ public static class PresentationConfiguration
                     .AssignableTo(typeof(IEndpointRegister)))
                 .AsImplementedInterfaces()
                 .WithSingletonLifetime());
+
+    public static WebApplication UseApiEndpoints(
+        this WebApplication app,
+        IServiceProvider serviceProvider)
+    {
+        var endpoints = serviceProvider.GetServices(typeof(IEndpointRegister));
+        foreach (var endpoint in endpoints)
+        {
+            (endpoint as IEndpointRegister)?.AddEndpoints(app);
+        }
+
+        return app;
+    }
 }

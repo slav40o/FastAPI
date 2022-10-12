@@ -1,7 +1,7 @@
 ﻿namespace FastAPI.Features.Identity.Infrastructure.Persistence.Configurations;
 
 using FastAPI.Features.Identity.Domain.Entities;
-using FastAPI.Layers.Persistence.Configurations;
+using FastAPI.Layers.Infrastructure.Persistence.SQL.Configurations;
 using FastAPI.Libraries.Validation;
 
 using Microsoft.EntityFrameworkCore;

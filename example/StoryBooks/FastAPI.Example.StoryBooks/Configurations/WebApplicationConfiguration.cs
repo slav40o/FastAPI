@@ -1,13 +1,24 @@
 ﻿namespace FastAPI.Example.StoryBooks.Configurations;
 
-using FastAPI.Features.Identity.Presentation;
-using FastAPI.Layers.Persistence;
-
-using Microsoft.Extensions.Options;
+using FastAPI.Layers.Infrastructure.Persistence.SQL;
+using FastAPI.Layers.Presentation;
 
 public static class WebApplicationConfiguration
 {
     public static WebApplication ConfigureWebApplication(this WebApplication app)
+    {
+        app.UserCommonApplicationServices();
+
+        using var serviceScope = app.Services.CreateScope();
+        var serviceProvider = serviceScope.ServiceProvider;
+
+        app.UseApiEndpoints(serviceProvider)
+           .UseDbInitializers(serviceProvider);
+
+        return app;
+    }
+
+    private static void UserCommonApplicationServices(this WebApplication app)
     {
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -25,21 +36,12 @@ public static class WebApplicationConfiguration
            .UseAuthorization()
            .UseStaticFiles();
 
-        using var serviceScope = app.Services.CreateScope();
-        var serviceProvider = serviceScope.ServiceProvider;
-
-        app.UseApiEndpoints(serviceProvider)
-           .UseDbInitializers(serviceProvider);
-
-
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger()
                .UseSwaggerUI();
         }
-
-        return app;
     }
 
     private static IApplicationBuilder UseDbInitializers(

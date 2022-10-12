@@ -26,8 +26,6 @@ public static class DomainConfigurations
             .AsImplementedInterfaces()
             .WithScopedLifetime());
 
-        services.TryAddTransient<IDomainEventDispatcher, DomainEventDispatcher>();
-
         return services;
     }
 }

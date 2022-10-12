@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Persistence.Configurations;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL.Configurations;
 
 using FastAPI.Layers.Domain.Entities;
 

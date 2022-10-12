@@ -1,11 +1,11 @@
 ﻿namespace FastAPI.Features.Identity.Infrastructure;
 
 using FastAPI.Features.Identity.Application;
-using FastAPI.Features.Identity.Application.Services;
 using FastAPI.Features.Identity.Domain.Entities;
+using FastAPI.Features.Identity.Domain.Repositories;
 using FastAPI.Features.Identity.Infrastructure.Persistence;
-using FastAPI.Features.Identity.Infrastructure.Services;
-using FastAPI.Layers.Persistence.SQL;
+using FastAPI.Features.Identity.Infrastructure.Persistence.Repositories;
+using FastAPI.Layers.Infrastructure.Persistence.SQL;
 
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +32,7 @@ public static class IdentityInfrastructureConfigurations
                 typeof(IdentityInfrastructureConfigurations).Assembly,
                 connectionStirng)
             .AddIdentity<IdentityUserDbContext>(configuration)
-            .AddScoped<IIdentityEmailService, DummyEmailService>();
+            .AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }

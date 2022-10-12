@@ -1,8 +1,8 @@
-﻿namespace FastAPI.Layers.Persistence;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL;
 
 using Microsoft.EntityFrameworkCore;
 
-using FastAPI.Layers.Persistence.Events;
+using Events;
 using System.Threading.Tasks;
 using MediatR;
 using FastAPI.Layers.Domain.Events.Abstractions;
@@ -14,14 +14,14 @@ using FastAPI.Layers.Domain.Events.Abstractions;
 public abstract class BaseDbContext<TContext> : DbContext, IEventDbContext
     where TContext : DbContext
 {
-    private readonly IDomainEventDispatcher dispatcher;
+    private readonly IMediator dispatcher;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TContext"/> class.
     /// </summary>
     /// <param name="options">DB context options.</param>
     /// <param name="dispatcher">Event dispatching.</param>
-    public BaseDbContext(DbContextOptions<TContext> options, IDomainEventDispatcher dispatcher)
+    public BaseDbContext(DbContextOptions<TContext> options, IMediator dispatcher)
         : base(options)
     {
         this.dispatcher = dispatcher;

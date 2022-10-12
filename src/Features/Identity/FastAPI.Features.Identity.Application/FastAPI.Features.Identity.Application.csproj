@@ -7,11 +7,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Emails\UserRegistered\UserRegisteredTemplate.html" />
+    <None Remove="Resources\Emails\_EmailLayout.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Emails\UserRegistered\UserRegisteredTemplate.html" />
+    <EmbeddedResource Include="Resources\Emails\_EmailLayout.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Layers\FastAPI.Layers.Application\FastAPI.Layers.Application.csproj" />
     <ProjectReference Include="..\FastAPI.Features.Identity.Domain\FastAPI.Features.Identity.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\EmailMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EmailMessages.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\UserValidationMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -20,6 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\EmailMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmailMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\UserValidationMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UserValidationMessages.Designer.cs</LastGenOutput>

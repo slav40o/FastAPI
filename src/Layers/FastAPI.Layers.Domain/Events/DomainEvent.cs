@@ -2,9 +2,16 @@
 
 using FastAPI.Layers.Domain.Events.Abstractions;
 
-public abstract class DomainEvent : IDomainEvent
+using MediatR;
+
+public abstract class DomainEvent : IDomainEvent, INotification
 {
+    public DomainEvent()
+    {
+        this.OccuredOn = DateTimeOffset.UtcNow;
+    }
+
     public bool Handled { get; set; }
 
-    public DateTime OccuredOn { get; init; }
+    public DateTimeOffset OccuredOn { get; init; }
 }

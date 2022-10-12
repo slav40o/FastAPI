@@ -8,7 +8,6 @@ using FastAPI.Layers.Presentation.Result;
 
 using MediatR;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
@@ -83,7 +82,7 @@ public static class MediatrEndpointExtensions
                 .Produces(StatusCodes.Status400BadRequest, typeof(ErrorResult));
         }
 
-        return ApplyAuthorization(builder, requestType.GetCustomAttribute<AuthorizeAttribute>());
+        return ApplyAuthorization(builder, requestType.GetCustomAttribute<AppAuthorizeAttribute>());
     }
 
     private static AppRequestTypes GetRequestType(Type requestType)
@@ -144,16 +143,16 @@ public static class MediatrEndpointExtensions
                     => await mediator.Send(request, cancellationToken).ToIResult());
     }
 
-    private static RouteHandlerBuilder ApplyAuthorization(this RouteHandlerBuilder builder, AuthorizeAttribute? authAttribute)
+    private static RouteHandlerBuilder ApplyAuthorization(this RouteHandlerBuilder builder, AppAuthorizeAttribute? authAttribute)
     {
         if (authAttribute is null)
         {
             return builder;
         }
 
-        if (authAttribute.Policy is not null)
+        if (authAttribute.PolicyNames is not null)
         {
-            return builder.RequireAuthorization(authAttribute.Policy)
+            return builder.RequireAuthorization(authAttribute.PolicyNames)
                 .Produces(StatusCodes.Status401Unauthorized);
         }
 

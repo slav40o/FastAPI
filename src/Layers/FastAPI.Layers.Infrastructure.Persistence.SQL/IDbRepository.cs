@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Persistence;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL;
 
 using FastAPI.Layers.Domain.Entities.Abstractions;
 using FastAPI.Layers.Domain.Repositories;

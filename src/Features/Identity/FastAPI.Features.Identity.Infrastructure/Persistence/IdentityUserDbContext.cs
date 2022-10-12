@@ -1,8 +1,9 @@
 ﻿namespace FastAPI.Features.Identity.Infrastructure.Persistence;
 
 using FastAPI.Features.Identity.Domain.Entities;
-using FastAPI.Layers.Domain.Events.Abstractions;
-using FastAPI.Layers.Persistence.Events;
+using FastAPI.Layers.Infrastructure.Persistence.SQL.Events;
+
+using MediatR;
 
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -13,14 +14,14 @@ using Microsoft.EntityFrameworkCore;
 /// </summary>
 public class IdentityUserDbContext : IdentityDbContext<User>, IDataProtectionKeyContext, IEventDbContext
 {
-    private readonly IDomainEventDispatcher eventDispatcher;
+    private readonly IMediator eventDispatcher;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="IdentityUserDbContext"/> class.
     /// </summary>
     /// <param name="options">DB context options.</param>
     /// <param name="eventDispatcher">Event dispatcher.</param>
-    public IdentityUserDbContext(DbContextOptions<IdentityUserDbContext> options, IDomainEventDispatcher eventDispatcher)
+    public IdentityUserDbContext(DbContextOptions<IdentityUserDbContext> options, IMediator eventDispatcher)
         : base(options)
     {
         this.eventDispatcher = eventDispatcher;

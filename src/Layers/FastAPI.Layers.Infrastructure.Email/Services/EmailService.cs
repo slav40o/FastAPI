@@ -2,45 +2,56 @@
 
 using FastAPI.Layers.Application.Email;
 using FastAPI.Layers.Application.Email.Models;
-using FastAPI.Layers.Infrastructure.Email.Settings;
-using Microsoft.Extensions.Options;
+using FastAPI.Layers.Infrastructure.Email.Abstractions;
 
-using System.Threading.Tasks;
-
+/// <summary>
+/// Central email service responsible for email generation and sending.
+/// </summary>
 public sealed class EmailService : IEmailService
 {
-    private readonly EmailTemplateSettings settings;
+    private readonly ITemplateRenderer templateRenderer;
     private readonly IEmailSender emailSender;
-    private readonly IEmailTemplateRenderer templateRenderer;
 
-    public EmailService(
-        IOptions<EmailTemplateSettings> opts,
-        IEmailSender emailSender,
-        IEmailTemplateRenderer templateRenderer)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EmailService"/> class.
+    /// </summary>
+    /// <param name="templateRenderer">Templates renderer.</param>
+    /// <param name="emailSender">Email sender service.</param>
+    public EmailService(ITemplateRenderer templateRenderer, IEmailSender emailSender)
     {
-        settings = opts.Value;
-        this.emailSender = emailSender;
         this.templateRenderer = templateRenderer;
+        this.emailSender = emailSender;
     }
 
-    public async Task SendAsync(string to, string subject, string body)
+    /// <inheritdoc/>
+    public Task<bool> SendAsync(string to, string subject, string body, CancellationToken cancellationToken = default)
+        => emailSender.SendEmailAsync(to, subject, body, cancellationToken);
+
+    /// <inheritdoc/>
+    public async Task<bool> SendAsync<T>(EmailModel<T> model, CancellationToken cancellationToken = default)
     {
-        await emailSender.SendEmailAsync(to, subject, body);
+        string emailBody = await templateRenderer.RenderAsync<T>(model.Data);
+        return await emailSender.SendEmailAsync(
+            model.To,
+            model.Subject,
+            emailBody,
+            model.Cc,
+            model.Bcc,
+            model.Attachments,
+            cancellationToken);
     }
 
-    public Task SendAsync<TData>(SendEmailModel<TData> emailModel)
-        where TData : class
+    /// <inheritdoc/>
+    public async Task<bool> SendAsync<T>(string templateName, EmailModel<T> model, CancellationToken cancellationToken = default)
     {
-        string modelName = typeof(TData).Name;
-        string viewName = modelName.Replace(settings.ModelNameSuffix, string.Empty);
-
-        return SendAsync(viewName, emailModel);
-    }
-
-    public async Task SendAsync<TData>(string viewName, SendEmailModel<TData> emailModel)
-        where TData : class
-    {
-        string body = await templateRenderer.RenderAsync(viewName, emailModel.Model);
-        await emailSender.SendEmailAsync(emailModel.To, emailModel.Subject, body);
+        string emailBody = await templateRenderer.RenderAsync<T>(templateName, model.Data);
+        return await emailSender.SendEmailAsync(
+            model.To,
+            model.Subject,
+            emailBody,
+            model.Cc,
+            model.Bcc,
+            model.Attachments,
+            cancellationToken);
     }
 }

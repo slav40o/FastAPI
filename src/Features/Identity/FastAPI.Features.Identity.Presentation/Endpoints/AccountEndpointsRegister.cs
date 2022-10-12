@@ -1,10 +1,11 @@
 ﻿namespace FastAPI.Features.Identity.Presentation.Endpoints;
 
+using FastAPI.Features.Identity.Application.Requests.Users.List;
 using FastAPI.Features.Identity.Application.Requests.Users.Register;
+using FastAPI.Features.Identity.Application.Requests.Users.UpdateDetails;
 using FastAPI.Layers.Presentation.Endpoints;
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 
 public sealed class AccountEndpointsRegister : IEndpointRegister
 {
@@ -12,6 +13,8 @@ public sealed class AccountEndpointsRegister : IEndpointRegister
 
     public void AddEndpoints(WebApplication app)
     {
+        app.MediateQueryRequest<ListUsersRequest, UserListItem>(BaseURL);
         app.MediateRequest<RegisterUserRequest, RegisterUserResponseModel>(BaseURL);
+        app.MediateRequest<UpdateDetailsRequest>(BaseURL);
     }
 }

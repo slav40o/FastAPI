@@ -2,13 +2,11 @@
 
 using FastAPI.Features.Identity.Application.Extensions;
 using FastAPI.Features.Identity.Application.Resources;
-using FastAPI.Features.Identity.Application.Services;
 using FastAPI.Features.Identity.Domain.Builders.Abstractions;
 using FastAPI.Features.Identity.Domain.Entities;
 using FastAPI.Features.Identity.Domain.Services.Auth;
 using FastAPI.Features.Identity.Domain.Services.Security;
 using FastAPI.Features.Identity.Domain.Services.Users;
-using FastAPI.Layers.Application;
 using FastAPI.Layers.Application.Handlers;
 using FastAPI.Layers.Application.Response;
 using FastAPI.Layers.Application.Settings;
@@ -23,8 +21,6 @@ internal sealed class RegisterUserRequestHandler : AppRequestHandler<RegisterUse
 
     private readonly IUserManager userManager;
     private readonly IUserBuilder userBuilder;
-    private readonly IIdentityEmailService emailService;
-    private readonly IHttpUtilities httpUtilities;
     private readonly ILoginProviderService loginService;
 
     public RegisterUserRequestHandler(
@@ -32,16 +28,12 @@ internal sealed class RegisterUserRequestHandler : AppRequestHandler<RegisterUse
         IOptions<IdentitySettings> identitySettings,
         IUserManager userManager,
         IUserBuilder userBuilder,
-        IIdentityEmailService emailService,
-        IHttpUtilities httpUtilities,
         ILoginProviderService loginService)
     {
         this.appSettings = appSettings.Value;
         this.identitySettings = identitySettings.Value;
         this.userManager = userManager;
         this.userBuilder = userBuilder;
-        this.emailService = emailService;
-        this.httpUtilities = httpUtilities;
         this.loginService = loginService;
     }
 
@@ -67,8 +59,6 @@ internal sealed class RegisterUserRequestHandler : AppRequestHandler<RegisterUse
             return this.Failure(UserValidationMessages.RegistrationFailed);
         }
 
-        await this.SendUserRegisteredEmail(user, cancellationToken);
-
         LoginDataModel? loginData = null;
         if (this.identitySettings.LoginOnRegistration)
         {
@@ -82,16 +72,6 @@ internal sealed class RegisterUserRequestHandler : AppRequestHandler<RegisterUse
         }
 
         return this.Success(UserValidationMessages.RegistrationSucceeded, new RegisterUserResponseModel(user.Id, loginData));
-    }
-
-    private async Task SendUserRegisteredEmail(User user, CancellationToken cancellationToken = default)
-    {
-        string? token = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
-        string? urlSafeToken = this.httpUtilities.UrlEncode(token);
-        if (urlSafeToken is not null)
-        {
-            await this.emailService.SendUserRegisteredEmail(user, urlSafeToken, cancellationToken);
-        }
     }
 
     private async Task<IdentityResult> SetAdminRole(RegisterUserRequest request, User user, IdentityResult identityResult)
