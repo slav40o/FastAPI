@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Features.Identity.Application.Requests.Users.Register;
+﻿namespace FastAPI.Features.Identity.Application.Requests.Account.Register;
 
 using FastAPI.Features.Identity.Domain.Services.Auth;
 

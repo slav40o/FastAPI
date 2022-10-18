@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Features.Identity.Application.Requests.Users.ConfirmEmail;
+﻿namespace FastAPI.Features.Identity.Application.Requests.Account.ConfirmEmail;
 
 using FastAPI.Layers.Application.Request;
 using FastAPI.Layers.Application.Request.Attributes;

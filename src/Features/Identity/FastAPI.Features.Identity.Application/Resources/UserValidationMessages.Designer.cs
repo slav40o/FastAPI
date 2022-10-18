@@ -61,6 +61,42 @@ namespace FastAPI.Features.Identity.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your password was not changed!.
+        /// </summary>
+        internal static string ChangePasswordFail {
+            get {
+                return ResourceManager.GetString("ChangePasswordFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your passwords was changed successfully..
+        /// </summary>
+        internal static string ChangePasswordSuccess {
+            get {
+                return ResourceManager.GetString("ChangePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email is not confirmed!.
+        /// </summary>
+        internal static string ConfirmEmailFail {
+            get {
+                return ResourceManager.GetString("ConfirmEmailFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your email was confirmed..
+        /// </summary>
+        internal static string ConfirmEmailSuccess {
+            get {
+                return ResourceManager.GetString("ConfirmEmailSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;Confirm Password&apos; must be equal to the &apos;Password&apos; field..
         /// </summary>
         internal static string ConfirmPasswordNotMatching {

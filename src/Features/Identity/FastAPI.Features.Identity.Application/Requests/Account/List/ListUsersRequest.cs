@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Features.Identity.Application.Requests.Users.List;
+﻿namespace FastAPI.Features.Identity.Application.Requests.Account.List;
 
 using FastAPI.Layers.Application.Request;
 

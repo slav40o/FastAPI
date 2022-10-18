@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Features.Identity.Application.Services;
 
-using FastAPI.Features.Identity.Application.Requests.Users.ConfirmEmail;
+using FastAPI.Features.Identity.Application.Requests.Account.ConfirmEmail;
 using FastAPI.Features.Identity.Application.Resources;
 using FastAPI.Features.Identity.Application.Resources.Emails.UserRegistered;
 using FastAPI.Features.Identity.Domain.Entities;

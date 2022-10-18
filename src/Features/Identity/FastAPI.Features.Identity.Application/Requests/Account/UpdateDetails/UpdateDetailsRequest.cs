@@ -1,11 +1,11 @@
-﻿namespace FastAPI.Features.Identity.Application.Requests.Users.UpdateDetails;
+﻿namespace FastAPI.Features.Identity.Application.Requests.Account.UpdateDetails;
 
 using FastAPI.Features.Identity.Domain.Entities;
 using FastAPI.Layers.Application.Request;
 using FastAPI.Layers.Application.Request.Attributes;
 
-[AppAuthorize]
 [AppUpdateRequest]
+[AppAuthorize(RequestPolicies.ConfirmedEmailOnly)]
 public sealed record UpdateDetailsRequest(
     string Id,
     string FirstName,

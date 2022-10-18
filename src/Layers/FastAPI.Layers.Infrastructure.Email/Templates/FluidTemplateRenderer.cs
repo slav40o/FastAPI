@@ -111,7 +111,7 @@ internal sealed class FluidTemplateRenderer : ITemplateRenderer
         if (memoryCache.Get($"EmailTemplate-{templateResourceName}") is not IFluidTemplate cachedTemplate)
         {
             var template = await templateProvider.GetTemplateAsync(templateResourceName);
-            if (template is null)
+            if (template is null || template.Content is null)
             {
                 throw new TemplateNotFoundException($"Template '{templateResourceName}' is not found!");
             }

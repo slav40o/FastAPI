@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Features.Identity.Application.Requests.Users.UpdateDetails;
+﻿namespace FastAPI.Features.Identity.Application.Requests.Account.UpdateDetails;
 
 using FastAPI.Libraries.Validation;
 

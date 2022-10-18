@@ -7,7 +7,7 @@ public static class WebApplicationConfiguration
 {
     public static WebApplication ConfigureWebApplication(this WebApplication app)
     {
-        app.UserCommonApplicationServices();
+        app.UseCommonApplicationServices();
 
         using var serviceScope = app.Services.CreateScope();
         var serviceProvider = serviceScope.ServiceProvider;
@@ -18,7 +18,7 @@ public static class WebApplicationConfiguration
         return app;
     }
 
-    private static void UserCommonApplicationServices(this WebApplication app)
+    private static void UseCommonApplicationServices(this WebApplication app)
     {
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())

@@ -11,6 +11,7 @@ using FastAPI.Libraries.Validation;
 
 using Fluid;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -21,7 +22,7 @@ using System.Reflection;
 public static class EmailConfigurationExtensions
 {
     private static Action<EmailTemplateSettings> DefaultEmailTemplateSettings
-    => (s) => { };
+        => (s) => { };
 
     /// <summary>
     /// Configure email services.
@@ -66,8 +67,7 @@ public static class EmailConfigurationExtensions
             .AddMemoryCache()
             .AddSendGrid(emailSettings.ApiKey)
             .AddFluidTemplates()
-            .TryAddSingleton<ITemplateProvider>(
-                    new EmbeddedTemplateProvider(templateSettings.LayoutViewFileName, emailAssemblies));
+            .AddEmbeddedTemplateProvider(templateSettings, emailAssemblies);
 
         services.TryAddTransient<IEmailService, EmailService>();
 
@@ -107,6 +107,17 @@ public static class EmailConfigurationExtensions
     {
         services.TryAddSingleton<FluidParser>();
         services.TryAddTransient<ITemplateRenderer, FluidTemplateRenderer>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddEmbeddedTemplateProvider(
+        this IServiceCollection services,
+        EmailTemplateSettings templateSettings,
+        params Assembly[] emailAssemblies)
+    {
+        services.TryAddSingleton<ITemplateProvider>(
+                    new EmbeddedTemplateProvider(templateSettings.LayoutViewFileName, emailAssemblies));
 
         return services;
     }
