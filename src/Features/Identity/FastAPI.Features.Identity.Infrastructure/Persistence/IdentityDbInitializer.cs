@@ -1,7 +1,7 @@
 ﻿namespace FastAPI.Features.Identity.Infrastructure.Persistence;
 
 using FastAPI.Layers.Application.Settings;
-using FastAPI.Layers.Infrastructure.Persistence.SQL;
+using FastAPI.Layers.Infrastructure.Persistence;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

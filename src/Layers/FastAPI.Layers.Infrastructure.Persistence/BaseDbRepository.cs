@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence;
 
 using System;
 using System.Linq;
@@ -24,7 +24,7 @@ public abstract class BaseDbRepository<TDbContext, TEntity, TKey> : IDbRepositor
     /// <param name="dbContext">db context.</param>
     protected BaseDbRepository(TDbContext dbContext)
     {
-        this.DbContext = dbContext;
+        DbContext = dbContext;
     }
 
     /// <summary>
@@ -35,13 +35,13 @@ public abstract class BaseDbRepository<TDbContext, TEntity, TKey> : IDbRepositor
     /// <inheritdoc/>
     public async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        await this.DbContext.AddAsync(entity, cancellationToken);
+        await DbContext.AddAsync(entity, cancellationToken);
     }
 
     /// <inheritdoc/>
     public IQueryable<TEntity> All()
     {
-        return this.DbContext.Set<TEntity>();
+        return DbContext.Set<TEntity>();
     }
 
     /// <inheritdoc/>
@@ -52,18 +52,18 @@ public abstract class BaseDbRepository<TDbContext, TEntity, TKey> : IDbRepositor
             throw new ArgumentNullException(nameof(key));
         }
 
-        return await this.DbContext.FindAsync<TEntity>(keyValues: new object[] { key }, cancellationToken: cancellationToken);
+        return await DbContext.FindAsync<TEntity>(keyValues: new object[] { key }, cancellationToken: cancellationToken);
     }
 
     /// <inheritdoc/>
     public async Task SaveAsync(CancellationToken cancellationToken = default)
     {
-        await this.DbContext.SaveChangesAsync(cancellationToken);
+        await DbContext.SaveChangesAsync(cancellationToken);
     }
 
     /// <inheritdoc/>
     public IQueryable<TEntity> AllAsNoTracking()
     {
-        return this.All().AsNoTracking();
+        return All().AsNoTracking();
     }
 }

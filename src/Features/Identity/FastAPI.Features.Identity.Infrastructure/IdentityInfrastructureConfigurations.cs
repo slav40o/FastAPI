@@ -5,7 +5,8 @@ using FastAPI.Features.Identity.Domain.Entities;
 using FastAPI.Features.Identity.Domain.Repositories;
 using FastAPI.Features.Identity.Infrastructure.Persistence;
 using FastAPI.Features.Identity.Infrastructure.Persistence.Repositories;
-using FastAPI.Layers.Infrastructure.Persistence.SQL;
+using FastAPI.Layers.Infrastructure.Persistence.Postgre;
+using FastAPI.Layers.Infrastructure.Persistence;
 
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
@@ -15,20 +16,19 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class IdentityInfrastructureConfigurations
 {
-    private const string DefaultConnectionName = "DefaultConnection";
-
     public static IServiceCollection AddIdentityInfrastructureLayer(
         this IServiceCollection services,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        string dbConnectionStringName)
     {
-        string? connectionStirng = configuration.GetConnectionString(DefaultConnectionName);
+        string? connectionStirng = configuration.GetConnectionString(dbConnectionStringName);
         if (connectionStirng is null)
         {
             throw new ApplicationException("DB connection string is not specified.");
         }
 
         services
-            .AddSqlServerPersistence<IdentityUserDbContext>(
+            .AddPostgrePersistence<IdentityUserDbContext>(
                 typeof(IdentityInfrastructureConfigurations).Assembly,
                 connectionStirng)
             .AddIdentity<IdentityUserDbContext>(configuration)

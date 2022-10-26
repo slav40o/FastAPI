@@ -1,11 +1,12 @@
-﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence;
+
+using Events;
+
+using MediatR;
 
 using Microsoft.EntityFrameworkCore;
 
-using Events;
 using System.Threading.Tasks;
-using MediatR;
-using FastAPI.Layers.Domain.Events.Abstractions;
 
 /// <summary>
 /// Base DB context.
@@ -33,12 +34,12 @@ public abstract class BaseDbContext<TContext> : DbContext, IEventDbContext
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>A Task that represents the Save operation. The task result contains the number of state entries written to the database.</returns>
     public int SaveChanges(CancellationToken cancellationToken = default)
-         => AsyncHelper.RunSync(() => this.SaveChangesAsync(cancellationToken));
+         => AsyncHelper.RunSync(() => SaveChangesAsync(cancellationToken));
 
     /// <inheritdoc/>
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        await this.DispatchEvents(this.dispatcher);
+        await this.DispatchEvents(dispatcher);
         return await base.SaveChangesAsync(cancellationToken);
     }
 

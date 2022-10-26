@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Layers\FastAPI.Layers.Infrastructure.Persistence.SQL\FastAPI.Layers.Infrastructure.Persistence.SQL.csproj" />
+    <ProjectReference Include="..\..\..\Layers\FastAPI.Layers.Infrastructure.Persistence.Postgre\FastAPI.Layers.Infrastructure.Persistence.Postgre.csproj" />
     <ProjectReference Include="..\FastAPI.Features.Identity.Application\FastAPI.Features.Identity.Application.csproj" />
   </ItemGroup>
 

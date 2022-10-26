@@ -1,15 +1,27 @@
 ﻿namespace FastAPI.Layers.Infrastructure.Email.Abstractions;
 
 /// <summary>
-/// General email layout view model interface. For now is available only internally.
-/// In future we can have generic template renderer that accepts email layout type and data.
-/// For now we have one shared(set-up in the infrastructure) email layout model and at least one layout template views.
+/// General email layout view model interface.
 /// </summary>
-internal interface IEmailLayoutModel
+public interface IEmailLayoutModel
 {
     /// <summary>
     /// Gets or sets layout internal body content.
     /// This content is the dynamic part rendered for each different template view.
     /// </summary>
-    string Content { get; set; }
+    string Content { get; }
+
+    /// <summary>
+    /// Set content.
+    /// </summary>
+    /// <param name="content"></param>
+    /// <returns></returns>
+    void SetContent(string content);
+
+    /// <summary>
+    /// Copy's the current instance into a new one with the given new content.
+    /// </summary>
+    /// <param name="content">New layout content(rendered body)</param>
+    /// <returns>Copied instance.</returns>
+    IEmailLayoutModel CopyWithNewContent(string content);
 }

@@ -11,7 +11,6 @@ using FastAPI.Libraries.Validation;
 
 using Fluid;
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -61,7 +60,7 @@ public static class EmailConfigurationExtensions
         services
             .Configure(emailSettingsConfig)
             .Configure(templateSettingsConfig)
-            .AddEmailLayout(emailSettings.ClientURL);
+            .AddDefaultEmailLayout(emailSettings.ClientURL);
 
         services
             .AddMemoryCache()
@@ -84,15 +83,27 @@ public static class EmailConfigurationExtensions
         return services;
     }
 
+    public static IServiceCollection AddDefaultEmailLayout(this IServiceCollection services, string clientUrl)
+    {
+        services.TryAddSingleton<IEmailLayoutModel, BaseLayoutModel>();
+        return services;
+    }
+
+    public static IServiceCollection AddCustomEmailLayout<T>(
+        this IServiceCollection services,
+        Action<T> layoutModelAction)
+            where T : IEmailLayoutModel, new()
+    {
+        var layout = new T();
+        layoutModelAction.Invoke(layout);
+
+        services.TryAddSingleton<IEmailLayoutModel>(layout);
+        return services;
+    }
+
     private static IServiceCollection AddTemplateSettings(this IServiceCollection services)
         => services.Configure((EmailTemplateSettings s) => { });
     
-    private static IServiceCollection AddEmailLayout(this IServiceCollection services, string clientUrl)
-        => services.Configure<LayoutModel>(cfg =>
-            {
-                cfg.SetClientUrl(clientUrl);
-            });
-
     private static IServiceCollection AddSendGrid(this IServiceCollection services, string apiKey)
     {
         services.TryAddTransient<IEmailSender, SendGridEmailSender>();

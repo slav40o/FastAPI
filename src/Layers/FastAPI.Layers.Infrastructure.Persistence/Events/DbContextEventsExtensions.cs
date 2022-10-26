@@ -1,7 +1,6 @@
-﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL.Events;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.Events;
 
 using FastAPI.Layers.Domain.Entities.Abstractions;
-using FastAPI.Layers.Domain.Events.Abstractions;
 
 using MediatR;
 

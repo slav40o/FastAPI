@@ -11,12 +11,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.23.1" />
+	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-    <ProjectReference Include="..\FastAPI.Layers.Application\FastAPI.Layers.Application.csproj" />
-  </ItemGroup>
+		<ProjectReference Include="..\FastAPI.Layers.Application\FastAPI.Layers.Application.csproj" />
+	</ItemGroup>
 	
-
 </Project>

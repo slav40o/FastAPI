@@ -1,4 +1,4 @@
-﻿namespace FastAPI.Layers.Infrastructure.Persistence.SQL.Configurations;
+﻿namespace FastAPI.Layers.Infrastructure.Persistence.Configurations;
 
 using FastAPI.Layers.Domain.Entities.ValueObjects;
 

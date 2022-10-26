@@ -1,7 +1,7 @@
 ﻿namespace FastAPI.Features.Identity.Infrastructure.Persistence;
 
 using FastAPI.Features.Identity.Domain.Entities;
-using FastAPI.Layers.Infrastructure.Persistence.SQL.Events;
+using FastAPI.Layers.Infrastructure.Persistence.Events;
 
 using MediatR;
 

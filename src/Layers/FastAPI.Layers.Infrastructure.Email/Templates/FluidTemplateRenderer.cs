@@ -1,10 +1,7 @@
 ﻿namespace FastAPI.Layers.Infrastructure.Email.Templates;
 
-using System.Threading.Tasks;
-
 using FastAPI.Layers.Infrastructure.Email.Abstractions;
 using FastAPI.Layers.Infrastructure.Email.Exceptions;
-using FastAPI.Layers.Infrastructure.Email.Models;
 using FastAPI.Layers.Infrastructure.Email.Settings;
 using FastAPI.Libraries.Validation;
 
@@ -13,16 +10,18 @@ using Fluid;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
+using System.Threading.Tasks;
+
 /// <summary>
 /// Template render using Fluid library. This internally relies on the liquid template language.
 /// </summary>
 internal sealed class FluidTemplateRenderer : ITemplateRenderer
 {
     private readonly FluidParser fluidParser;
-    private readonly LayoutModel layoutModel;
     private readonly EmailTemplateSettings templateSettings;
     private readonly IMemoryCache memoryCache;
     private readonly ITemplateProvider templateProvider;
+    private readonly IEmailLayoutModel layoutModel;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FluidTemplateRenderer"/> class.
@@ -30,13 +29,13 @@ internal sealed class FluidTemplateRenderer : ITemplateRenderer
     /// <param name="fluidParser">Fluid parser instance.</param>
     /// <param name="memoryCache">Memory cache.</param>
     /// <param name="templateProvider">Template content provider.</param>
-    /// <param name="layoutModelOptions">Shared layout model settings.</param>
+    /// <param name="layoutModel">Shared layout model settings.</param>
     /// <param name="templateSettingsOptions">Template settings.</param>
     public FluidTemplateRenderer(
         FluidParser fluidParser,
         IMemoryCache memoryCache,
         ITemplateProvider templateProvider,
-        IOptions<LayoutModel> layoutModelOptions,
+        IEmailLayoutModel layoutModel,
         IOptions<EmailTemplateSettings> templateSettingsOptions)
     {
         ValidateSettings(templateSettingsOptions.Value);
@@ -44,7 +43,7 @@ internal sealed class FluidTemplateRenderer : ITemplateRenderer
         this.fluidParser = fluidParser;
         this.memoryCache = memoryCache;
         this.templateProvider = templateProvider;
-        layoutModel = layoutModelOptions.Value;
+        this.layoutModel = layoutModel;
         templateSettings = templateSettingsOptions.Value;
     }
 
@@ -73,8 +72,8 @@ internal sealed class FluidTemplateRenderer : ITemplateRenderer
         }
 
         IFluidTemplate layoutTemplate = await GetCachedTemplate(layoutResourceName);
-        layoutModel.Content = bodyContent;
-        string emailContent = await RenderTemplate(layoutModel, layoutTemplate);
+        var layoutData = this.layoutModel.CopyWithNewContent(bodyContent);
+        string emailContent = await RenderTemplate(layoutData, layoutTemplate);
 
         return emailContent;
     }

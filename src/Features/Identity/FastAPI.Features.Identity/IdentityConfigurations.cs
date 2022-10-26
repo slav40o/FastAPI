@@ -12,12 +12,15 @@ using System.Reflection;
 
 public static class IdentityConfigurations
 {
+    private const string DefaultDbConnectionName = "DefaultPostgreConnection";
+
     public static IServiceCollection AddIdentityFeature(
         this IServiceCollection services,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        string dbConnectionStringName = DefaultDbConnectionName)
             => services
                 .Configure<IdentitySettings>(configuration.GetSection(nameof(IdentitySettings)))
-                .AddLayers(configuration);
+                .AddLayers(configuration, dbConnectionStringName);
 
     public static Assembly[] GetEmailAssemblies()
         => new Assembly[1] { typeof(IdentitySettings).Assembly };
@@ -25,17 +28,19 @@ public static class IdentityConfigurations
     public static IServiceCollection AddIdentityFeature(
         this IServiceCollection services,
         IConfiguration configuration,
-        Action<IdentitySettings> identitySettingsAction)
+        Action<IdentitySettings> identitySettingsAction,
+        string dbConnectionStringName = DefaultDbConnectionName)
             => services
                 .Configure(identitySettingsAction)
-                .AddLayers(configuration);
+                .AddLayers(configuration, dbConnectionStringName);
 
     private static IServiceCollection AddLayers(
         this IServiceCollection services,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        string connectionStringName)
             => services
                 .AddIdentityDomainLayer()
                 .AddIdentityApplicationLayer()
-                .AddIdentityInfrastructureLayer(configuration)
+                .AddIdentityInfrastructureLayer(configuration, connectionStringName)
                 .AddIdentityPresentationLayer();
 }

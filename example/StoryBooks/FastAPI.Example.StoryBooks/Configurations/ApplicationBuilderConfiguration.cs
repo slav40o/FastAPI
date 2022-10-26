@@ -3,6 +3,7 @@
 using FastAPI.Features.Identity;
 using FastAPI.Layers.Application.Settings;
 using FastAPI.Layers.Infrastructure.Email;
+using FastAPI.Layers.Infrastructure.Email.Settings;
 using FastAPI.Layers.Infrastructure.Http;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -57,15 +58,17 @@ public static class ApplicationBuilderConfiguration
                     .Build();
             });
 
+        var emailSettings = builder.Configuration.GetSection(nameof(EmailSettings)).Get<EmailSettings>()!;
+
         // Add shared infrastructure services here
         builder.Services
             .Configure<AppSettings>(builder.Configuration.GetSection(nameof(AppSettings)))
             .AddEmail(cfg =>
             {
-                cfg.ApiKey = builder.Configuration.GetValue<string>(SendGridApiKey)!;
-                cfg.ClientURL = "https://www.google.bg/";
-                cfg.SenderName = "Slavi Tsvetanov";
-                cfg.SenderAddress = "slavicvetanov@gmail.com";
+                cfg.ApiKey = emailSettings.ApiKey;
+                cfg.ClientURL = emailSettings.ClientURL;
+                cfg.SenderName = emailSettings.SenderName;
+                cfg.SenderAddress = emailSettings.SenderAddress;
             }, emailAssemblies)
             // .AddRabbitMqMessaging()
             // .AddAzureDocumentStorage()

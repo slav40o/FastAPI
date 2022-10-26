@@ -2,7 +2,7 @@
 
 using FastAPI.Features.Identity.Domain.Entities;
 using FastAPI.Features.Identity.Domain.Repositories;
-using FastAPI.Layers.Infrastructure.Persistence.SQL;
+using FastAPI.Layers.Infrastructure.Persistence;
 
 using Microsoft.EntityFrameworkCore;
 

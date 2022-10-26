@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Example.StoryBooks.Configurations;
 
-using FastAPI.Layers.Infrastructure.Persistence.SQL;
+using FastAPI.Layers.Infrastructure.Persistence;
 using FastAPI.Layers.Presentation;
 
 public static class WebApplicationConfiguration
