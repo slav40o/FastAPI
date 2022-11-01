@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,11 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Documents.Azure\FastAPI.Layers.Infrastructure.Documents.Azure.csproj" />
     <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Email\FastAPI.Layers.Infrastructure.Email.csproj" />
     <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Http\FastAPI.Layers.Infrastructure.Http.csproj" />
     <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Messaging\FastAPI.Layers.Infrastructure.Messaging.csproj" />
-    <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Persistence.SQL\FastAPI.Layers.Infrastructure.Persistence.SQL.csproj" />
+    <ProjectReference Include="..\FastAPI.Layers.Infrastructure.Persistence\FastAPI.Layers.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\FastAPI.Layers.Presentation\FastAPI.Layers.Presentation.csproj" />
   </ItemGroup>
 

@@ -3,6 +3,10 @@
 using FastAPI.Layers.Infrastructure.Persistence;
 using FastAPI.Layers.Presentation;
 
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 public static class WebApplicationConfiguration
 {
     public static WebApplication ConfigureWebApplication(this WebApplication app)

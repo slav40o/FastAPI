@@ -18,7 +18,7 @@ public static partial class ValidationConstants
         public const int MaxLength = 16;
         public static readonly Regex Format = PhoneFormatRegex();
 
-        [RegexGenerator("^([+]?[\\s0-9]+)?(\\d{3}|[(]?[0-9]+[)])?([-]?[\\s]?[0-9])+$", RegexOptions.Compiled)]
+        [GeneratedRegex("^([+]?[\\s0-9]+)?(\\d{3}|[(]?[0-9]+[)])?([-]?[\\s]?[0-9])+$", RegexOptions.Compiled)]
         private static partial Regex PhoneFormatRegex();
     }
 
@@ -28,7 +28,7 @@ public static partial class ValidationConstants
         public const int MaxLength = 250;
         public static readonly Regex Format = EmailFormatRegex();
 
-        [RegexGenerator("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", RegexOptions.Compiled)]
+        [GeneratedRegex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", RegexOptions.Compiled)]
         private static partial Regex EmailFormatRegex();
     }
 

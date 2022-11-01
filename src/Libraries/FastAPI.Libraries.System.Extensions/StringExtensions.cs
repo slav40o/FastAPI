@@ -7,7 +7,7 @@ namespace System;
 /// </summary>
 public static partial class StringExtensions
 {
-    [RegexGenerator("</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*?\"|'.*?'|[^'\">\\s]+))?)+\\s*|\\s*)/?>", RegexOptions.Compiled)]
+    [GeneratedRegex("</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*?\"|'.*?'|[^'\">\\s]+))?)+\\s*|\\s*)/?>", RegexOptions.Compiled)]
     private static partial Regex HtmlTagRegex();
     private static readonly Regex htmlTagsRegex = HtmlTagRegex();
 

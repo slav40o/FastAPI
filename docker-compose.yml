@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  fastapi.example.storybooks:
+    image: fastapi.example.storybooks:dev
+    container_name: fastapi-example-storybooks
+    build:
+      context: .
+      dockerfile: example/StoryBooks/FastAPI.Example.StoryBooks/Dockerfile
+    depends_on:
+      - fastapi.postgre
+
+  fastapi.postgre:
+    image: 'postgres:latest'
+    container_name: 'fastapi-postgre'
