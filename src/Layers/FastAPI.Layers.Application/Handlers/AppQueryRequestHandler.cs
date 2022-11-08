@@ -4,14 +4,16 @@ using FastAPI.Layers.Application.Request;
 using FastAPI.Layers.Application.Request.Paging;
 using FastAPI.Layers.Application.Response;
 
-using MediatR;
+using Mediator;
 
 using System.Linq;
 
 public abstract class AppQueryRequestHandler<TRequest, TListItem> : IRequestHandler<TRequest, AppResponse<IPageData<TListItem>>>
     where TRequest : IAppQueryRequest<TListItem>
 {
-    public async Task<AppResponse<IPageData<TListItem>>> Handle(TRequest request, CancellationToken cancellationToken)
+    public abstract Task<IQueryable<TListItem>> HandleRequest(TRequest request, CancellationToken cancellationToken);
+
+    public async ValueTask<AppResponse<IPageData<TListItem>>> Handle(TRequest request, CancellationToken cancellationToken)
     {
         var itemsQuery = await this.HandleRequest(request, cancellationToken);
 
@@ -23,6 +25,4 @@ public abstract class AppQueryRequestHandler<TRequest, TListItem> : IRequestHand
 
         return AppResponse.Success(string.Empty, pageData);
     }
-
-    public abstract Task<IQueryable<TListItem>> HandleRequest(TRequest request, CancellationToken cancellationToken);
 }

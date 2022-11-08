@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 internal static class ResultExtensions
 {
-    public static async Task<IResult> ToIResult(this Task<AppResponse> response)
+    public static async ValueTask<IResult> ToIResult(this ValueTask<AppResponse> response)
     {
         var result = await response;
 
@@ -33,7 +33,7 @@ internal static class ResultExtensions
         return Results.Problem(result.Message);
     }
 
-    public static async Task<IResult> ToIResult<TData>(this Task<AppResponse<TData>> response)
+    public static async ValueTask<IResult> ToIResult<TData>(this ValueTask<AppResponse<TData>> response)
     {
         var result = await response;
 

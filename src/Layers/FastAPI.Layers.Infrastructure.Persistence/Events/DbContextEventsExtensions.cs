@@ -2,7 +2,7 @@
 
 using FastAPI.Layers.Domain.Entities.Abstractions;
 
-using MediatR;
+using Mediator;
 
 /// <summary>
 /// Db context extensions.

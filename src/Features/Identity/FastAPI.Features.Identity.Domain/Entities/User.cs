@@ -39,6 +39,15 @@ public sealed class User : IdentityUser, IUser, IAggregateRoot, IEntity<string>
     }
 
     /// <summary>
+    /// Gets or sets user email.
+    /// </summary>
+    public new string Email
+    {
+        get => base.Email!;
+        set => base.Email = value;
+    }
+
+    /// <summary>
     /// Gets user first name.
     /// </summary>
     public string FirstName { get; private set; } = default!;

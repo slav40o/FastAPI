@@ -24,7 +24,7 @@ public sealed class ChangePasswordRequestHandler : AppRequestHandler<ChangePassw
         this.userRepository = userRepository;
     }
 
-    public override async Task<AppResponse> HandleRequest(ChangePasswordRequest request, CancellationToken cancellationToken)
+    public override async ValueTask<AppResponse> HandleRequest(ChangePasswordRequest request, CancellationToken cancellationToken)
     {
         var user = await this.userRepository.FindByIdAsync(request.UserId, cancellationToken);
         if (user is null)

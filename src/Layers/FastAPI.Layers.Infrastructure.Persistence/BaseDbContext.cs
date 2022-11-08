@@ -2,7 +2,7 @@
 
 using Events;
 
-using MediatR;
+using Mediator;
 
 using Microsoft.EntityFrameworkCore;
 

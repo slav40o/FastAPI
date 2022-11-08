@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Layers.Domain.Events.Abstractions;
 
-using MediatR;
+using Mediator;
 
 /// <summary>
 /// Represents a Domain-level event - a simple POCO class, modeling an occurrence in the domain.

@@ -6,6 +6,11 @@
 public interface IUser
 {
     /// <summary>
+    /// Gets user Id.
+    /// </summary>
+    string Id { get; }
+
+    /// <summary>
     /// Gets user first name.
     /// </summary>
     string FirstName { get; }

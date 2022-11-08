@@ -37,7 +37,7 @@ internal sealed class RegisterUserRequestHandler : AppRequestHandler<RegisterUse
         this.loginService = loginService;
     }
 
-    public override async Task<AppResponse<RegisterUserResponseModel>> HandleRequest(RegisterUserRequest request, CancellationToken cancellationToken)
+    public override async ValueTask<AppResponse<RegisterUserResponseModel>> HandleRequest(RegisterUserRequest request, CancellationToken cancellationToken)
     {
         var user = this.userBuilder
             .WithEmail(request.Email)

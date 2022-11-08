@@ -3,7 +3,7 @@
 using FastAPI.Layers.Application.Request.Paging;
 using FastAPI.Layers.Application.Response;
 
-using MediatR;
+using Mediator;
 
 public interface IAppRequest : IRequest<AppResponse>
 {

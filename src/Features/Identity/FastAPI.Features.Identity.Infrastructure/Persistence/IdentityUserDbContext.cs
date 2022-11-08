@@ -3,7 +3,7 @@
 using FastAPI.Features.Identity.Domain.Entities;
 using FastAPI.Layers.Infrastructure.Persistence.Events;
 
-using MediatR;
+using Mediator;
 
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

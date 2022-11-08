@@ -2,7 +2,7 @@
 
 using FluentValidation;
 
-using MediatR;
+using Mediator;
 
 using Request;
 
@@ -21,7 +21,7 @@ public sealed class RequestValidationBehavior<TRequest, TResponse> : IPipelineBe
         this.validators = validators;
     }
 
-    public Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public ValueTask<TResponse> Handle(TRequest request, CancellationToken cancellationToken, MessageHandlerDelegate<TRequest, TResponse> next) 
     {
         var context = new ValidationContext<TRequest>(request);
 
@@ -39,6 +39,6 @@ public sealed class RequestValidationBehavior<TRequest, TResponse> : IPipelineBe
             request.AddValidationErrors(errors);
         }
 
-        return next();
+        return next(request, cancellationToken);
     }
 }

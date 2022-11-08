@@ -28,7 +28,7 @@ internal sealed class ConfirmEmailRequestHandler : AppRequestHandler<ConfirmEmai
         this.httpUtilities = httpUtilities;
     }
 
-    public override async Task<AppResponse> HandleRequest(ConfirmEmailRequest request, CancellationToken cancellationToken)
+    public override async ValueTask<AppResponse> HandleRequest(ConfirmEmailRequest request, CancellationToken cancellationToken)
     {
         var user = await this.userRepository.FindByIdAsync(request.UserId, cancellationToken);
         if (user is null)

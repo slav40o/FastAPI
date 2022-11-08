@@ -6,7 +6,6 @@ using FastAPI.Features.Identity.Domain.Repositories;
 using FastAPI.Features.Identity.Infrastructure.Persistence;
 using FastAPI.Features.Identity.Infrastructure.Persistence.Repositories;
 using FastAPI.Layers.Infrastructure.Persistence.Postgre;
-using FastAPI.Layers.Infrastructure.Persistence;
 
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;

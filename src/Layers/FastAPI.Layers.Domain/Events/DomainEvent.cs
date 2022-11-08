@@ -2,7 +2,7 @@
 
 using FastAPI.Layers.Domain.Events.Abstractions;
 
-using MediatR;
+using Mediator;
 
 public abstract class DomainEvent : IDomainEvent, INotification
 {

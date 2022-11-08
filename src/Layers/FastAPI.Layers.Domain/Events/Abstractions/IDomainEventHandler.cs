@@ -1,6 +1,6 @@
 ﻿namespace FastAPI.Layers.Domain.Events.Abstractions;
 
-using MediatR;
+using Mediator;
 
 /// <summary>
 /// Represents a handler for a Domain-level event.

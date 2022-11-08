@@ -1,14 +1,12 @@
 ﻿namespace FastAPI.Layers.Application;
 
 using FastAPI.Layers.Application.Behaviors;
-using FastAPI.Layers.Application.Settings;
 using FastAPI.Libraries.Mapping;
 
 using FluentValidation;
 
-using MediatR;
+using Mediator;
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using System.Reflection;
@@ -29,7 +27,7 @@ public static class ApplicationConfigurations
         services
             .AddMappingProfiles(applicationAssembly)
             .AddValidatorsFromAssembly(applicationAssembly)
-            .AddMediatR(config => config.AsScoped(), applicationAssembly);
+            .AddMediator();
 
         return services;
     }

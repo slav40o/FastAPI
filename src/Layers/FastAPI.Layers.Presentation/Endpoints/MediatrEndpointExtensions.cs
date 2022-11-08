@@ -6,7 +6,7 @@ using Application.Request.Paging;
 
 using FastAPI.Layers.Presentation.Result;
 
-using MediatR;
+using Mediator;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

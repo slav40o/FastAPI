@@ -36,7 +36,7 @@ public sealed class UserRegisteredEventHandler : IDomainEventHandler<UserCreated
         this.httpUtilities = httpUtilities;
     }
 
-    public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
+    public async ValueTask Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
     {
         var user = await this.userRepository.GetAsync(notification.Id, cancellationToken);
         if (user is null)

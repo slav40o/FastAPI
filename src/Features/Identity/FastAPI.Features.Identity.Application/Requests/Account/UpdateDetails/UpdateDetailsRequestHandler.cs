@@ -24,7 +24,7 @@ internal sealed class UpdateDetailsRequestHandler : AppRequestHandler<UpdateDeta
         this.userRepository = userRepository;
     }
 
-    public override async Task<AppResponse> HandleRequest(UpdateDetailsRequest request, CancellationToken cancellationToken)
+    public override async ValueTask<AppResponse> HandleRequest(UpdateDetailsRequest request, CancellationToken cancellationToken)
     {
         var user = await this.userRepository.FindByIdAsync(request.Id, cancellationToken);
         if (user is null)
