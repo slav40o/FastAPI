@@ -25,6 +25,6 @@ Update-Database -Context IdentityUserDbContext
 ## Required configuration variables
 Examples for connection string for both DB types
 ```
-"ConnectionStrings:DefaultPostgreConnection": "Server=localhost; Port=5432; User Id=postgres; Password={pass}; Database=SB;",
-"ConnectionStrings:DefaultSqlServerConnection": "Server=127.0.0.1,1433; Database=SB;User Id=sa;Password={pass};MultipleActiveResultSets=true"
+"ConnectionStrings:DefaultConnection": "Server=localhost; Port=5432; User Id=postgres; Password={pass}; Database=SB;",
+"ConnectionStrings:DefaultConnection": "Server=127.0.0.1,1433; Database=SB;User Id=sa;Password={pass};MultipleActiveResultSets=true;TrustServerCertificate=true"
 ```

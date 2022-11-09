@@ -5,6 +5,7 @@ using FastAPI.Features.Identity.Domain.Entities;
 using FastAPI.Features.Identity.Domain.Repositories;
 using FastAPI.Features.Identity.Infrastructure.Persistence;
 using FastAPI.Features.Identity.Infrastructure.Persistence.Repositories;
+// using FastAPI.Layers.Infrastructure.Persistence.SQL;
 using FastAPI.Layers.Infrastructure.Persistence.Postgre;
 
 using Microsoft.AspNetCore.DataProtection;
@@ -28,8 +29,9 @@ public static class IdentityInfrastructureConfigurations
 
         services
             .AddPostgrePersistence<IdentityUserDbContext>(
-                typeof(IdentityInfrastructureConfigurations).Assembly,
-                connectionStirng)
+                typeof(IdentityInfrastructureConfigurations).Assembly, connectionStirng)
+            //.AddSqlServerPersistence<IdentityUserDbContext>(
+            //    typeof(IdentityInfrastructureConfigurations).Assembly, connectionStirng)
             .AddIdentity<IdentityUserDbContext>(configuration)
             .AddScoped<IUserRepository, UserRepository>();
 

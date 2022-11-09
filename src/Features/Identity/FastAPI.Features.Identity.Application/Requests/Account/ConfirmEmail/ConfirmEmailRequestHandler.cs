@@ -41,7 +41,7 @@ internal sealed class ConfirmEmailRequestHandler : AppRequestHandler<ConfirmEmai
             return AppResponse.NotFound(UserValidationMessages.InvalidUserAccess);
         }
 
-        string? token = this.httpUtilities.UrlDecode(request.Token);
+        string token = this.httpUtilities.UrlDecode(request.Token)!;
         var identityResult = await this.userManager.ConfirmEmailAsync(user, token);
 
         if (!identityResult.Succeeded)

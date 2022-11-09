@@ -42,7 +42,7 @@ public sealed class UserManager : IUserManager
         => manager.ResetPasswordAsync(user, token, newPassword);
 
     /// <inheritdoc />
-    public Task<IdentityResult> ConfirmEmailAsync(User user, string? token)
+    public Task<IdentityResult> ConfirmEmailAsync(User user, string token)
         => manager.ConfirmEmailAsync(user, token);
 
     /// <inheritdoc />
@@ -62,7 +62,7 @@ public sealed class UserManager : IUserManager
         => manager.DeleteAsync(user);
 
     /// <inheritdoc />
-    public Task<string?> GenerateEmailConfirmationTokenAsync(User user)
+    public Task<string> GenerateEmailConfirmationTokenAsync(User user)
         => manager.GenerateEmailConfirmationTokenAsync(user);
 
     /// <inheritdoc />

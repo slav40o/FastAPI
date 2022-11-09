@@ -12,7 +12,7 @@ using System.Reflection;
 
 public static class IdentityConfigurations
 {
-    private const string DefaultDbConnectionName = "DefaultPostgreConnection";
+    private const string DefaultDbConnectionName = "DefaultConnection";
 
     public static IServiceCollection AddIdentityFeature(
         this IServiceCollection services,

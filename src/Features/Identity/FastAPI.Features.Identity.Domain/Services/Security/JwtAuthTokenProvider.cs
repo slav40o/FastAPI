@@ -44,8 +44,8 @@ public sealed class JwtAuthTokenProvider : IAuthTokenProvider
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Email, user.UserName),
-            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.Email, user.UserName!),
+            new Claim(ClaimTypes.Name, user.UserName!),
             new Claim(ClaimTypes.GivenName, user.FirstName),
             new Claim(ClaimTypes.Surname, user.LastName),
         };
@@ -122,7 +122,7 @@ public sealed class JwtAuthTokenProvider : IAuthTokenProvider
     private SymmetricSecurityKey GetSymmetricSecurityKey()
     {
         string? secret = configuration[AuthenticationSecretKey];
-        byte[] key = Encoding.ASCII.GetBytes(secret);
+        byte[] key = Encoding.ASCII.GetBytes(secret!);
 
         return new SymmetricSecurityKey(key);
     }

@@ -39,7 +39,7 @@ public interface IUserManager
     /// </summary>
     /// <param name="user">User entity.</param>
     /// <returns>Task holding generated token.</returns>
-    Task<string?> GenerateEmailConfirmationTokenAsync(User user);
+    Task<string> GenerateEmailConfirmationTokenAsync(User user);
 
     /// <summary>
     /// Add user to given role.
@@ -63,7 +63,7 @@ public interface IUserManager
     /// <param name="user">User entity.</param>
     /// <param name="token">Email confirmation token.</param>
     /// <returns>Task holding identity result.</returns>
-    Task<IdentityResult> ConfirmEmailAsync(User user, string? token);
+    Task<IdentityResult> ConfirmEmailAsync(User user, string token);
 
     /// <summary>
     /// Get list of roles assigned to given user.

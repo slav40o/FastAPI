@@ -7,9 +7,19 @@ services:
     build:
       context: .
       dockerfile: example/StoryBooks/FastAPI.Example.StoryBooks/Dockerfile
+    mem_limit: 512m
+    cpus: 0.3
     depends_on:
       - fastapi.postgre
 
   fastapi.postgre:
     image: 'postgres:latest'
     container_name: 'fastapi-postgre'
+    mem_limit: 512m
+    cpus: 0.3
+
+  #fastapi.mssql:
+  #  image: mcr.microsoft.com/mssql/server:2019-latest
+  #  container_name: fastapi-mssql
+  #  mem_limit: 1792m
+  #  cpus: 0.3

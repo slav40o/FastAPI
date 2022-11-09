@@ -8,6 +8,8 @@ services:
     ports:
       - 5010:80
       - 7010:443
+    networks:
+      - fastapi-network
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -15,7 +17,26 @@ services:
   fastapi.postgre:
     ports:
       - 5432:5432
+    networks:
+      - fastapi-network
     environment:
       POSTGRES_USER: postgres # The PostgreSQL user (useful to connect to the database)
       POSTGRES_PASSWORD: 5ecretPostgrePassword # The PostgreSQL password (useful to connect to the database)
       POSTGRES_DB: SB # The PostgreSQL default database (automatically created at first launch)
+
+  #fastapi.mssql:
+  #  environment:
+  #    - ACCEPT_EULA=Y
+  #    - SA_PASSWORD=G4z5nNAc5c
+  #  ports:
+  #    - 1432:1433
+  #  networks:
+  #    - fastapi-network
+  #  volumes:
+  #    - fastapi_sql:/var/opt/mssql
+
+networks:
+  fastapi-network:
+
+#volumes:
+  #fastapi_sql:

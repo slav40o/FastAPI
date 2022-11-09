@@ -12,14 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FastAPI.Features.Identity.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(IdentityUserDbContext))]
-    [Migration("20221026182711_IdentityInitialSchema")]
-    partial class IdentityInitialSchema
+    [Migration("20221109223447_IdentityNet7Migration")]
+    partial class IdentityNet7Migration
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -41,6 +42,7 @@ namespace FastAPI.Features.Identity.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
